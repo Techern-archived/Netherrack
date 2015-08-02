@@ -2,7 +2,7 @@
 name = "rusted_minecraft"
 version = "0.0.0"
 authors = ["Cruz Julian Bishop <cruzjbishop@gmail.com>"]
-description = "Reserved crate for a Minecraft server programmed in Rust, which will later be used as experience for a separate game"
+description = "A Minecraft server programmed in Rust"
 
 repository = "https://github.com/Techern/RustedMinecraft"
 readme = "README.md"
