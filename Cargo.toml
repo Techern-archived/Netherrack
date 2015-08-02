@@ -1,0 +1,10 @@
+[package]
+name = "rusted_minecraft"
+version = "0.0.0"
+authors = ["Cruz Julian Bishop <cruzjbishop@gmail.com>"]
+description = "A Minecraft server programmed in Rust"
+
+repository = "https://github.com/Techern/RustedMinecraft"
+readme = "README.md"
+keywords = ["Minecraft", "Server"]
+license = "MIT"
