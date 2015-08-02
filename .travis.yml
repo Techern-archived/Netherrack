@@ -1,0 +1,17 @@
+#Okay, let's start.
+#First off, we'll be running in the new Docker containers
+sudo: false
+
+#This is Rust!
+language: rust
+
+#We'll try to officially support all three release categories.
+rust:
+ - "stable"
+ - "beta"
+ - "nightly"
+
+#Let's roll a custom script so we can test everything, hey?
+script:
+ - cargo build --verbose
+ - cargo test --verbose
