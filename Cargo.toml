@@ -1,10 +1,10 @@
 [package]
-name = "rusted_minecraft"
+name = "netherrack"
 version = "0.0.1-pre"
 authors = ["Cruz Julian Bishop <cruzjbishop@gmail.com>"]
 description = "A Minecraft server programmed in Rust"
 
-repository = "https://github.com/Techern/RustedMinecraft"
+repository = "https://github.com/Techern/Netherrack"
 readme = "README.md"
 keywords = ["Minecraft", "Server"]
 license = "MIT"
@@ -15,7 +15,7 @@ log = "0.3.1"
 integral_square_root = "1.0.0"
 
 [lib]
-name = "rusted_minecraft"
+name = "netherrack"
 path = "src/lib.rs"
 test = true
 doctest = true
@@ -25,7 +25,7 @@ plugin = false
 harness = true
 
 [[bin]]
-name = "rusted_minecraft_executable"
+name = "netherrack_executable"
 path = "src/main.rs"
 test = false
 doctest = false

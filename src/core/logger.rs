@@ -2,12 +2,12 @@ extern crate log;
 
 use self::log::{LogRecord, LogMetadata};
 
-///The Logger used by Rusted Minecraft
+///The Logger used by Netherrack
 ///
 ///For now, it simply logs to standard output. In future versions, it will be extended
-pub struct RustedMinecraftLogger;
+pub struct NetherrackLogger;
 
-impl log::Log for RustedMinecraftLogger {
+impl log::Log for NetherrackLogger {
 
     ///Checks to see if a LogRecord can be accepted based on LogMetadata
     #[allow(unused_variables)]

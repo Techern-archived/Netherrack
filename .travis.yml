@@ -2,26 +2,26 @@ language: rust
 addons:
   apt:
     packages:
-      - libcurl4-openssl-dev
-      - libelf-dev
-      - libdw-dev
+    - libcurl4-openssl-dev
+    - libelf-dev
+    - libdw-dev
 rust:
-  - nightly
-  - beta
-  - stable
+- nightly
+- beta
+- stable
 before_script:
-  - |
-    pip install 'travis-cargo<0.2' --user &&
-    export PATH=$HOME/.local/bin:$PATH
+- |
+  pip install 'travis-cargo<0.2' --user &&
+  export PATH=$HOME/.local/bin:$PATH
 script:
-  - |
-    travis-cargo build &&
-    travis-cargo test &&
-    travis-cargo bench &&
-    travis-cargo doc
+- |
+  travis-cargo build &&
+  travis-cargo test &&
+  travis-cargo bench &&
+  travis-cargo doc
 after_success:
-  - travis-cargo --only stable doc-upload
+- travis-cargo --only stable doc-upload
 env:
   global:
-    - TRAVIS_CARGO_NIGHTLY_FEATURE=""
-    - secure: QltBWstxu7f3qCRjgp0KhfCBQefHFDcunV3S+p0qdk3/yJ3Q7k7Y5h/KH8fdMAgdXeYKsYlyb+5LFeoe3yZqDQZUBbLuqPTF0XgKFU2Cz9nqoEC83eK84wEdJzybYscebDB8LNZBB26GgTmXzYiIUMqAmkOfCIAaP7epsDawAY31WQgk8AcKfTml6fnb3WIDTgCCnVOO+oUnJkUPqNAUd0P8H7eNmJ1OQTQrIWFdCObkcQc1VZqAV6EtkKx1hCjf9nvNNKFiyurZbeZcmQoOCOUeISTvuaJo0akuPe0vj6DIfDuNaL98uEOfMUxjHJNCBcLt6AkOg/3vP30xvDdIw92lsmi/P3w1i8yCVqezTumgwSjoH2nOXWQYNR15Ihz+gmKTa/PXyjt6lclE+qoiNPxTzQtoFuSNl5MNPHeSOZjZMYvh84frp3VTSaqnsE4cPMHe0HPzmW3M53+wLuwH2a8zfi0D7rlEqx8QrlisJxXTmuydXTg8SWjSi8r5l1qukaxrSD9waM62YpQon0C6rQTxLCIF/aTd97IqfyFzQOMo/Zx2CiK6iez6tvflb8eNo5Y9wWUh2ojNUNJyULiyGLciS7ZMsvkv/jzF7Dgm0ZcUc0EXiBQhrf37eN8h/poy51KW15VIN7vKfJ+sFJsQf3qpYUAsq2Ixi64JdviH/pA=
+  - TRAVIS_CARGO_NIGHTLY_FEATURE=""
+  - secure: TT+AOeCeDeI7x7cVxQl+PeaXIJlrdEgqU38k6W9uhlFcsD60ulr52nzkbrkf01O7xeBZ4Fanei61xc1FQlOmPeyM+GktN3jc4+B4NN/YStZEaZnmk7bl7vX7Rqw7b1bucHgkqYee6S5vK2LrFrNYnxs9fz0ruK1FRfNXi/iGPGPMBv/Dm/bz/HBAJDpPxrTbb0VU9XsbYeXZekWa7/SaRQEnJmETrg5XkSJm4ZHxsV0V5dSxNO7MZ149Gv4sNLMGlHWfXkyCfTSvc8V/7dqTkXUqa5GBXLCR1LMBJ2yF/LNMtrnyAnKPU80mybjFqfqd1m2/D1u1briZGJgMvg35d1H1nbXYoXlxoTDxLbD5t9AQ0VwL6FLMr/a3SMh8HOBTXMUtX0sbT6igm9WH+FP1rrG3RGKsG0jkMT9sqQWDr5BjRpkkSLqJ0iLqgp3kmM6iYvN8Y+1f6qawNAhSgCMHlccmVV3F1X7wxtMp5b7gMhQhlYNzNXhmmXd/b4KwG7j9TSEJ/tm7KFDFv+ww3Ri3ALbV3HF17EOCRAKdRW7q0O/v6XzgSKJkfsRI+d0LjdDOuz1SOXmBBvvR5z4jQwb1QTdFH9vzCzAQaYRVYRfEoA6FMZaAT7iPSSug5r61f7725pU8ElDwkA5uQuGVHqMghu4UpD+Ru6HT2ADUCYR/Rcc=

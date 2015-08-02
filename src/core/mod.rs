@@ -1,4 +1,4 @@
-//! Core functionality for Rusted Minecraft
+//! Core functionality for Netherrack
 //!
 //! Will be expanded dramatically in the future
 
