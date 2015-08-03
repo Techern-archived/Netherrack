@@ -1,8 +1,19 @@
-pub mod core;
+//! Placeholder that enables running Netherrack as a standalone executable.
+//!
+//! Actual logic is in the library itself so that, for example, an embedded server can be created.
+//!
+//! All you would need to do is set the logger!
+
+extern crate netherrack;
+
+pub use netherrack::*;
 
 #[macro_use]
 extern crate log;
 
+/// Starts a standalone version of Netherrack
+///
+/// It actually just sets the loggers, and then starts an embedded server :)
 fn main() {
 
     if set_global_logger() {
@@ -12,6 +23,8 @@ fn main() {
     }
 
     info!("Attempting to load Netherrack {}", core::constants::get_version());
+    
+    //TODO: Call function in library to start Netherrack
 
 }
 

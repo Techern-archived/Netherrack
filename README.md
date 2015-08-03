@@ -19,6 +19,12 @@ You can certainly try! Prepare to be disappointed, though, as most functionality
 
 By the time v0.0.5 is released, it should be playable. From there, we will keep growing bigger and better!
 
+#### I want to use Netherrack as an embedded server. Can I do that?
+
+Sure! Netherrack will fully support starting an embedded server. All you have to do is set the global logger and then run it :)
+
+You may eventually have to set more options, but for now it will be nice and simple
+
 ### Are there plugins?
 
 Not yet, but we're drafting a process that will allow a Netherrack server with plugins to interact with both vanilla and modified (with Forge, initially) clients without losing support for either.
