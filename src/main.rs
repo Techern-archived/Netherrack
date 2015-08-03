@@ -22,7 +22,7 @@ fn main() {
         error!("Could not set up logging");
     }
 
-    info!("Attempting to load Netherrack {}", core::constants::get_version());
+    info!("Attempting to load Netherrack {}", get_version());
     
     //TODO: Call function in library to start Netherrack
 
