@@ -1,13 +1,11 @@
-extern crate log;
-
-use self::log::{LogRecord, LogMetadata};
+use ::log::{LogRecord, LogMetadata};
 
 ///The Logger used by Netherrack
 ///
 ///For now, it simply logs to standard output. In future versions, it will be extended
 pub struct NetherrackLogger;
 
-impl log::Log for NetherrackLogger {
+impl ::log::Log for NetherrackLogger {
 
     ///Checks to see if a LogRecord can be accepted based on LogMetadata
     #[allow(unused_variables)]
@@ -19,7 +17,7 @@ impl log::Log for NetherrackLogger {
     fn log(&self, record: &LogRecord) {
         //First, check to see if logging is enabled for the metadata
         if self.enabled(record.metadata()) {
-            println!("[{}] - {}", record.level(), record.args());
+            println!("[{}] {}: {}", record.level(), record.target(), record.args());
         }
     }
 }
