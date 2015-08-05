@@ -12,6 +12,9 @@ pub use semver::Version;
 // Allow use of the core module
 pub mod core;
 
+// Allow access to the universe
+pub mod universe;
+
 // Okay, this is the start of Netherrack's functions
 
 /// The version of Netherrack as determined at compile time
