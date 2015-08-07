@@ -2,7 +2,13 @@
 //!
 //! This will eventually be moved
 
+//Need this to get an iterator from a slice
+use std::iter::FromIterator;
+
+use std::collections::VecDeque;
+
 use std::net::{Shutdown, TcpListener, TcpStream};
+
 use std::thread;
 
 use std::io::Read;
@@ -54,9 +60,9 @@ pub fn handle_new_client(mut stream: TcpStream) {
     
     loop {
     
-        let mut buffer = [0u8; 512];
+        let mut raw_buffer = [0u8; 512];
         
-        match stream.read(&mut buffer) {
+        match stream.read(&mut raw_buffer) {
         
             Err(error) => {
                 // Connection dropped out or something broke
@@ -71,7 +77,21 @@ pub fn handle_new_client(mut stream: TcpStream) {
                 if (count == 0) {
                     ::std::thread::sleep_ms(2);
                 } else {
-                    info!("Read {} bytes, information is {}: {}: {}: {}", count, buffer[0], buffer[1], buffer[2], buffer[3]);
+                
+                    let mut real_raw_buffer = &raw_buffer[0..count];
+                
+                    let buffer = VecDeque::from_iter(real_raw_buffer.into_iter());
+                    
+                    drop(raw_buffer);
+                
+                    info!("Read {} bytes, information is {}: {}: {}: {}", count, raw_buffer[0], raw_buffer[1], raw_buffer[2], raw_buffer[3]);
+                    
+                    info!("Real buffer size is {}", buffer.len());
+                    
+                    // Okay, to prevent a memory leak, we'll destroy the connection... For now.
+                    // In the future, we'll need to reference the ping/pong packets and kick it off after, say, 20 seconds
+                    stream.shutdown(Shutdown::Both);
+                    break;
                 }
             }
         
