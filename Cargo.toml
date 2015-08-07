@@ -16,11 +16,7 @@ log = "0.3.1"
 integral_square_root = "1.0.0"
 chrono = "0.2.15"
 uuid = "0.1.17"
-#protobuf = "1.0.1" - Issue on nightly, is fixed in git, not fixed in a release yet
-
-[dependencies.protobuf]
-git = "https://github.com/stepancheg/rust-protobuf.git"
-rev = "0965373700e72ac5d8abff43fc33dd24753d90bb"
+varint = "0.1.0"
 
 [lib]
 name = "netherrack"
