@@ -3,3 +3,4 @@
 //! Will be expanded dramatically in the future
 
 pub mod logger;
+pub mod network;

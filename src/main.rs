@@ -24,7 +24,7 @@ fn main() {
 
     info!("Attempting to load Netherrack {}", get_version());
     
-    //TODO: Call function in library to start Netherrack
+    start_server();
 
 }
 

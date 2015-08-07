@@ -24,3 +24,23 @@ pub const NETHERRACK_VERSION_STRING: &'static str = env!("CARGO_PKG_VERSION");
 pub fn get_version() -> Version {
     Version::parse(NETHERRACK_VERSION_STRING).unwrap()
 }
+
+/// Starts a new Netherrack server instance
+pub fn start_server() {
+    
+    info!("Netherrack startup called");
+    
+    trace!("Starting network in a new thread");
+    
+    std::thread::spawn(move || {
+        core::network::start_network();
+    });
+    
+    debug!("Networking should be set up");
+    
+    loop {
+        //TODO: In the future, execute a tick. Use Duration's span function to get time taken, sleep the remainder, and go again
+        std::thread::sleep_ms(20);
+    }
+    
+}
