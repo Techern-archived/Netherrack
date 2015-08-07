@@ -12,6 +12,9 @@ pub use semver::Version;
 // Allow use of the core module
 pub mod core;
 
+// Allow access to I/O operations
+pub mod io;
+
 // Allow access to the universe
 pub mod universe;
 
@@ -33,7 +36,7 @@ pub fn start_server() {
     trace!("Starting network in a new thread");
     
     std::thread::spawn(move || {
-        core::network::start_network();
+        io::network::start_network();
     });
     
     debug!("Networking should be set up");
