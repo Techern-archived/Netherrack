@@ -95,15 +95,22 @@ pub fn handle_new_client(mut stream: TcpStream) {
                     let mut buffer = DequeBuffer::from(backing);
                     
                     //drop(raw_buffer);
+                    
+                    let length_result = buffer.read_unsigned_varint_32();
+                    let id_result = buffer.read_unsigned_varint_32();
+                    
+                    if length_result.is_err() || id_result.is_err() {
+                        error!("Error while reading packet ID or length! Oh no, dropping connection");
+                        
+                        debug!("Shutdown result: {:?}", stream.shutdown(Shutdown::Both));
+                        break;
+                    }
                 
-                    info!("Read {} bytes, information is {}: {}: {}: {}", count, buffer.read_signed_byte(), buffer.read_signed_byte(), buffer.read_signed_byte(), buffer.read_signed_byte());
+                    info!("Read {} bytes, length is {}, id is {}", count, length_result.unwrap(), id_result.unwrap());
                     
-                    info!("Real buffer size is {}", buffer.remaining());
+                    info!("Remaining buffer size is {}", buffer.remaining());
                     
-                    // Okay, to prevent a memory leak, we'll destroy the connection... For now.
-                    // In the future, we'll need to reference the ping/pong packets and kick it off after, say, 20 seconds
-                    info!("Shutdown result: {:?}", stream.shutdown(Shutdown::Both));
-                    break;
+                    // This is a memory leak. We need to get the time of last packet and check to see if it's more than 20 seconds ago
                 }
             }
         

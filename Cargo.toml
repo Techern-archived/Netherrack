@@ -17,6 +17,7 @@ integral_square_root = "1.0.0"
 chrono = "0.2.15"
 uuid = "0.1.17"
 varint = "0.2.0"
+bit_utils = "0.1.0"
 
 [lib]
 name = "netherrack"
