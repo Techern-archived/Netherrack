@@ -4,6 +4,8 @@
 
 pub mod deque_buffer;
 
+pub mod packet;
+
 use std::collections::VecDeque;
 
 use std::net::{Shutdown, TcpListener, TcpStream};
