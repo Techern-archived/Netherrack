@@ -2,6 +2,8 @@
 //!
 //! This will eventually be moved
 
+pub mod deque_buffer;
+
 //Need this to get an iterator from a slice
 use std::iter::FromIterator;
 
@@ -68,17 +70,18 @@ pub fn handle_new_client(mut stream: TcpStream) {
                 // Connection dropped out or something broke
                 // In the future, we use the customized NetherrackStream to see if we're in GAME mode, and if so, get the attached player and start saving their information and get rid of them
                 // For now, we just exit the loop
-                error!("Got an error! {}",  error);
+                error!("Got an error! {}", error);
                 
-                stream.shutdown(Shutdown::Both);
+                let _ = stream.shutdown(Shutdown::Both);
                 break; //Close the connection
             }
             Ok(count) => {
-                if (count == 0) {
+                if count == 0 {
+                    //Nothing in stream, let's sleep for a few milliseconds and try again
                     ::std::thread::sleep_ms(2);
                 } else {
                 
-                    let mut real_raw_buffer = &raw_buffer[0..count];
+                    let real_raw_buffer = &raw_buffer[0..count];
                 
                     let buffer = VecDeque::from_iter(real_raw_buffer.into_iter());
                     
@@ -90,7 +93,7 @@ pub fn handle_new_client(mut stream: TcpStream) {
                     
                     // Okay, to prevent a memory leak, we'll destroy the connection... For now.
                     // In the future, we'll need to reference the ping/pong packets and kick it off after, say, 20 seconds
-                    stream.shutdown(Shutdown::Both);
+                    info!("Shutdown result: {:?}", stream.shutdown(Shutdown::Both));
                     break;
                 }
             }
