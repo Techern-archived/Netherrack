@@ -4,9 +4,6 @@
 
 pub mod deque_buffer;
 
-//Need this to get an iterator from a slice
-use std::iter::FromIterator;
-
 use std::collections::VecDeque;
 
 use std::net::{Shutdown, TcpListener, TcpStream};
@@ -14,6 +11,8 @@ use std::net::{Shutdown, TcpListener, TcpStream};
 use std::thread;
 
 use std::io::Read;
+
+use self::deque_buffer::DequeBuffer;
 
 fn start_listening(port: u16) -> Result<TcpListener, &'static str> {
 
@@ -62,7 +61,7 @@ pub fn handle_new_client(mut stream: TcpStream) {
     
     loop {
     
-        let mut raw_buffer = [0u8; 512];
+        let mut raw_buffer = vec![0u8; 512];
         
         match stream.read(&mut raw_buffer) {
         
@@ -81,15 +80,23 @@ pub fn handle_new_client(mut stream: TcpStream) {
                     ::std::thread::sleep_ms(2);
                 } else {
                 
-                    let real_raw_buffer = &raw_buffer[0..count];
-                
-                    let buffer = VecDeque::from_iter(real_raw_buffer.into_iter());
+                    // Now truncate the raw buffer - Don't worry, it will reallocate to 512 on the next networking loop
+                    raw_buffer.truncate(count);
                     
-                    drop(raw_buffer);
-                
-                    info!("Read {} bytes, information is {}: {}: {}: {}", count, raw_buffer[0], raw_buffer[1], raw_buffer[2], raw_buffer[3]);
+                    let mut backing: VecDeque<u8> = VecDeque::<u8>::with_capacity(count);
                     
-                    info!("Real buffer size is {}", buffer.len());
+                    for b in raw_buffer {
+                        
+                        backing.push_back(b);
+                    }
+                
+                    let mut buffer = DequeBuffer::from(backing);
+                    
+                    //drop(raw_buffer);
+                
+                    info!("Read {} bytes, information is {}: {}: {}: {}", count, buffer.read_signed_byte(), buffer.read_signed_byte(), buffer.read_signed_byte(), buffer.read_signed_byte());
+                    
+                    info!("Real buffer size is {}", buffer.remaining());
                     
                     // Okay, to prevent a memory leak, we'll destroy the connection... For now.
                     // In the future, we'll need to reference the ping/pong packets and kick it off after, say, 20 seconds

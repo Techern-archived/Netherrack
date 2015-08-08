@@ -13,6 +13,13 @@ pub struct DequeBuffer {
 
 impl DequeBuffer {
 
+    /// Creates a DequeBuffer from a VecDeque
+    ///
+    /// After this method, we own the VecDeque
+    pub fn from(deque: VecDeque<u8>) -> DequeBuffer {
+        DequeBuffer { data: deque }
+    }
+
     /// Gets the remaining bytes in this DequeBuffer
     pub fn remaining(&mut self) -> usize {
         self.data.len()
