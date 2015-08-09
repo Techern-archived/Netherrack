@@ -130,8 +130,24 @@ impl GameConnection {
                         
                         info!("Remaining buffer size is {}", buffer.remaining());
                         
-                        //TODO: Move to a MinecraftClientConnection, determine if the client is Forge or Vanilla, and set the GameState to HANDSHAKE
+                        if self.state == ConnectionState::HANDSHAKE {
                         
+                            debug!("Incoming handshake packet unhandled; ID: {}, Length: {}", packet_header.id, packet_header.length);
+                        
+                        } else if self.state == ConnectionState::LOGIN {
+                        
+                            debug!("Incoming login packet unhandled; ID: {}, Length: {}", packet_header.id, packet_header.length);
+                        
+                        } else if self.state == ConnectionState::STATUS {
+                        
+                            debug!("Incoming status packet unhandled; ID: {}, Length: {}", packet_header.id, packet_header.length);
+                        
+                        } else if self.state == ConnectionState::PLAY {
+                        
+                            debug!("Incoming play packet unhandled; ID: {}, Length: {}", packet_header.id, packet_header.length);
+                        
+                        }
+                        /*
                         if packet_header.id == 0 {
                             if packet_header.length == 1 {
                             
@@ -158,7 +174,7 @@ impl GameConnection {
                                 debug!("Protocol version {}, hostname: {}, port: {}", protocol_result.unwrap(), hostname, port);
                             
                             }
-                        }
+                        }*/
                         
                         // This is a memory leak. We need to get the time of last packet and check to see if it's more than 20 seconds ago
                     }
