@@ -5,6 +5,8 @@
 extern crate chrono;
 use self::chrono::duration::Duration;
 
+pub mod game_connection;
+
 pub mod deque_buffer;
 
 pub mod packet;
