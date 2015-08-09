@@ -69,7 +69,7 @@ pub fn handle_new_client(mut stream: TcpStream) {
     
     loop {
     
-        if (timeout_duration.num_seconds() >= 10) {
+        if timeout_duration.num_seconds() >= 10 {
             info!("Client timed out; Shutdown was {:?}", stream.shutdown(Shutdown::Both));
             break;
         }
