@@ -71,6 +71,16 @@ impl DequeBuffer {
         }
     }
     
+    /// Reads an unsigned short from the buffer
+    pub fn read_unsigned_short(&mut self) -> u16 {
+        
+        let high: u8 = self.read_unsigned_byte();
+        let low: u8 = self.read_unsigned_byte();
+        
+        ((high as u16) << 8) | low as u16
+        
+    }
+    
     /// Writes an unsigned byte to the buffer
     pub fn write_unsigned_byte(&mut self, value: u8) {
         self.data.push_back(value);

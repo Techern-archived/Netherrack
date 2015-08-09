@@ -151,7 +151,9 @@ impl GameConnection {
                                 
                                 let hostname: String = buffer.read_utf8_string();
                                 
-                                debug!("Protocol version {}, hostname: {}", protocol_result.unwrap(), hostname);
+                                let port: u16 = buffer.read_unsigned_short();
+                                
+                                debug!("Protocol version {}, hostname: {}, port: {}", protocol_result.unwrap(), hostname, port);
                             
                             }
                         }
