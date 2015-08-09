@@ -149,7 +149,9 @@ impl GameConnection {
                                     break;
                                 }
                                 
-                                debug!("Protocol version {}", protocol_result.unwrap());
+                                let hostname: String = buffer.read_utf8_string();
+                                
+                                debug!("Protocol version {}, hostname: {}", protocol_result.unwrap(), hostname);
                             
                             }
                         }

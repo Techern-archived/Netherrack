@@ -27,6 +27,33 @@ impl DequeBuffer {
     pub fn remaining(&mut self) -> usize {
         self.data.len()
     }
+    
+    /// Reads a UTF-8 string from the buffer
+    pub fn read_utf8_string(&mut self) -> String {
+        let size_result = self.read_unsigned_varint_32();
+        
+        if size_result.is_err() {
+            return String::from("!!!BAD_SIZE!!!");
+        } else {
+            let mut size: u32 = size_result.unwrap();
+            
+            let mut bytes: Vec<u8> = Vec::<u8>::with_capacity(size as usize);
+            
+            while size > 0 {
+                bytes.push(self.read_unsigned_byte());
+                size -= 1;
+            }
+            
+            let result = String::from_utf8(bytes);
+            
+            if result.is_ok() {
+                return result.unwrap();
+            } else {
+                return String::from("!!!INVALID_UTF8!!!");
+            }
+            
+        }
+    }
 
     /// Reads an unsigned byte from the buffer, returning 0 if no data is available
     pub fn read_unsigned_byte(&mut self) -> u8 {
