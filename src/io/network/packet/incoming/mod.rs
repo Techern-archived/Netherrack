@@ -1,3 +1,3 @@
-//! Temporary file to save this directory while I work this afternoon
+//! The module containing all incoming packet implementations
 //!
-//! More coming soon
+//! Any unimplemented packets currently print out the ID and length for future reference (see game_connection.rs)
