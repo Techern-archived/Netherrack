@@ -51,6 +51,16 @@ impl GameConnection {
         }
     }
     
+    pub fn disconnect(&mut self) {
+        //TODO: Check to see if in ConnectionState::PLAY, otherwise
+        let result = self.stream.shutdown(Shutdown::Both);
+        
+        if result.is_ok() == false {
+            error!("Error disconnecting: {:?}", result);
+        }
+        
+    }
+    
     /// Starts listening on the connection
     pub fn start_listening(&mut self) {
         
@@ -61,7 +71,8 @@ impl GameConnection {
         loop {
         
             if timeout_duration.num_seconds() >= 10 {
-                info!("Client timed out; Shutdown was {:?}", self.stream.shutdown(Shutdown::Both));
+                info!("Client timed out");
+                self.disconnect();
                 break;
             }
         
@@ -75,8 +86,8 @@ impl GameConnection {
                     // For now, we just exit the loop
                     error!("Got an error! {}", error);
                     
-                    let _ = self.stream.shutdown(Shutdown::Both);
-                    break; //Close the connection
+                    self.disconnect();
+                    break;
                 }
                 Ok(count) => {
                     if count == 0 {
@@ -107,7 +118,7 @@ impl GameConnection {
                         if length_result.is_err() || id_result.is_err() {
                             error!("Error while reading packet ID or length! Oh no, dropping connection");
                             
-                            debug!("Shutdown result: {:?}", self.stream.shutdown(Shutdown::Both));
+                            self.disconnect();
                             break;
                         }
                         
@@ -134,7 +145,7 @@ impl GameConnection {
                                 
                                 if protocol_result.is_err() {
                                     error!("Error reading protocol version");
-                                    debug!("Shutdown result: {:?}", self.stream.shutdown(Shutdown::Both));
+                                    self.disconnect();
                                     break;
                                 }
                                 
