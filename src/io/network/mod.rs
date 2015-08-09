@@ -2,9 +2,13 @@
 //!
 //! This will eventually be moved
 
+extern crate chrono;
+use self::chrono::duration::Duration;
+
 pub mod deque_buffer;
 
 pub mod packet;
+use self::packet::PacketHeader;
 
 use std::collections::VecDeque;
 
@@ -61,7 +65,14 @@ pub fn start_network() {
 pub fn handle_new_client(mut stream: TcpStream) {
     info!("Got a new client from {}! Oh my!", stream.peer_addr().unwrap());
     
+    let mut timeout_duration = Duration::zero();
+    
     loop {
+    
+        if (timeout_duration.num_seconds() >= 10) {
+            info!("Client timed out; Shutdown was {:?}", stream.shutdown(Shutdown::Both));
+            break;
+        }
     
         let mut raw_buffer = vec![0u8; 512];
         
@@ -79,8 +90,11 @@ pub fn handle_new_client(mut stream: TcpStream) {
             Ok(count) => {
                 if count == 0 {
                     //Nothing in stream, let's sleep for a few milliseconds and try again
+                    timeout_duration = timeout_duration + Duration::milliseconds(2);
                     ::std::thread::sleep_ms(2);
                 } else {
+                
+                    timeout_duration = Duration::zero();
                 
                     // Now truncate the raw buffer - Don't worry, it will reallocate to 512 on the next networking loop
                     raw_buffer.truncate(count);
@@ -105,10 +119,38 @@ pub fn handle_new_client(mut stream: TcpStream) {
                         debug!("Shutdown result: {:?}", stream.shutdown(Shutdown::Both));
                         break;
                     }
+                    
+                    let packet_header = PacketHeader { length: length_result.unwrap(), id: id_result.unwrap() };
                 
-                    info!("Read {} bytes, length is {}, id is {}", count, length_result.unwrap(), id_result.unwrap());
+                    info!("Read {} bytes, length is {}, id is {}", count, packet_header.length, packet_header.id);
                     
                     info!("Remaining buffer size is {}", buffer.remaining());
+                    
+                    //TODO: Move to a MinecraftClientConnection, determine if the client is Forge or Vanilla, and set the GameState to HANDSHAKE
+                    
+                    if packet_header.id == 0 {
+                        if packet_header.length == 1 {
+                        
+                            //This is a request packet
+                            debug!("Received a Server Status Request packet");
+                        
+                        } else {
+                        
+                            //This is a handshake packet
+                            debug!("Received a Handshake packet");
+                            
+                            let protocol_result = buffer.read_unsigned_varint_32();
+                            
+                            if protocol_result.is_err() {
+                                error!("Error reading protocol version");
+                                debug!("Shutdown result: {:?}", stream.shutdown(Shutdown::Both));
+                                break;
+                            }
+                            
+                            debug!("Protocol version {}", protocol_result.unwrap());
+                        
+                        }
+                    }
                     
                     // This is a memory leak. We need to get the time of last packet and check to see if it's more than 20 seconds ago
                 }
