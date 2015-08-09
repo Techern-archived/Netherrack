@@ -1,5 +1,9 @@
 //! Functions relating to network packets
 
+pub mod incoming;
+
+pub use super::game_connection::GameConnection;
+
 /// A struct defining the header of a Packet
 #[derive(Clone, Debug)]
 pub struct PacketHeader {
@@ -10,6 +14,28 @@ pub struct PacketHeader {
     /// The ID of this packet
     pub id: u32
     
+}
+
+/// A trait for all types that can represent packets
+pub trait Packet {
+
+    /// Gets this (Packet)'s header
+    fn get_header(&self) -> PacketHeader;
+    
+    /// Gets the connection to the client
+    fn get_connection(&self) -> GameConnection;
+
+}
+
+/// A trait for all incoming packets
+pub trait IncomingPacket {
+
+    /// Sets the header of this (IncomingPacket)
+    fn set_header(&self, header: PacketHeader);
+    
+    /// Decodes this (IncomingPacket)
+    fn decode(&self);
+
 }
 
 /// The ID of a handshake packet
