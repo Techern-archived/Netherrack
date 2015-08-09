@@ -68,14 +68,14 @@ impl GameConnection {
     /// Starts listening on the connection
     pub fn start_listening(&mut self) {
         
-        info!("Got a new client from {}! Oh my!", self.stream.peer_addr().unwrap());
+        trace!("Got a new client from {}!", self.stream.peer_addr().unwrap());
         
         let mut timeout_duration = Duration::zero();
         
         loop {
         
             if timeout_duration.num_seconds() >= 10 {
-                info!("Client timed out");
+                info!("Client at {} timed out, dropping connection", self.stream.peer_addr().unwrap());
                 self.disconnect();
                 break;
             }
@@ -127,16 +127,12 @@ impl GameConnection {
                         }
                         
                         let packet_header = PacketHeader { length: length_result.unwrap(), id: id_result.unwrap() };
-                    
-                        info!("Read {} bytes, length is {}, id is {}", count, packet_header.length, packet_header.id);
-                        
-                        info!("Remaining buffer size is {}", buffer.remaining());
                         
                         if self.state == ConnectionState::HANDSHAKE {
                         
                             match packet_header.id {
                             
-                                ID_HANDSHAKE_CTS_HANDSHAKING => debug!("Got a new handshake request"),                            
+                                ID_HANDSHAKE_CTS_HANDSHAKING => super::packet::incoming::handshake::HandshakePacket::decode(packet_header, self, &mut buffer).handle(self),
                                 _ => debug!("Incoming handshake packet unhandled; ID: {}, Length: {}", packet_header.id, packet_header.length)
                             
                             }
@@ -166,34 +162,6 @@ impl GameConnection {
                             }
                         
                         }
-                        /*
-                        if packet_header.id == 0 {
-                            if packet_header.length == 1 {
-                            
-                                //This is a request packet
-                                debug!("Received a Server Status Request packet");
-                            
-                            } else {
-                            
-                                //This is a handshake packet
-                                debug!("Received a Handshake packet");
-                                
-                                let protocol_result = buffer.read_unsigned_varint_32();
-                                
-                                if protocol_result.is_err() {
-                                    error!("Error reading protocol version");
-                                    self.disconnect();
-                                    break;
-                                }
-                                
-                                let hostname: String = buffer.read_utf8_string();
-                                
-                                let port: u16 = buffer.read_unsigned_short();
-                                
-                                debug!("Protocol version {}, hostname: {}, port: {}", protocol_result.unwrap(), hostname, port);
-                            
-                            }
-                        }*/
                         
                         // This is a memory leak. We need to get the time of last packet and check to see if it's more than 20 seconds ago
                     }
