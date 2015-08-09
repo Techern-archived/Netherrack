@@ -14,6 +14,7 @@ use std::io::Read;
 use super::deque_buffer::DequeBuffer;
 
 /// An enum describing the current connection's state
+#[derive(PartialEq, Clone, Copy, Debug)]
 pub enum ConnectionState {
     
     /// Connection is in handshake mode
@@ -31,6 +32,7 @@ pub enum ConnectionState {
 }
 
 /// A struct defining a game connection
+#[derive(Debug)]
 pub struct GameConnection {
 
     /// The TCP stream bound to this GameConnection
