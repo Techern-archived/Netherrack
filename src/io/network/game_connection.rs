@@ -132,19 +132,35 @@ impl GameConnection {
                         
                         if self.state == ConnectionState::HANDSHAKE {
                         
-                            debug!("Incoming handshake packet unhandled; ID: {}, Length: {}", packet_header.id, packet_header.length);
-                        
+                            match packet_header.id {
+                            
+                                _ => debug!("Incoming handshake packet unhandled; ID: {}, Length: {}", packet_header.id, packet_header.length)
+                            
+                            }
+                                            
                         } else if self.state == ConnectionState::LOGIN {
                         
-                            debug!("Incoming login packet unhandled; ID: {}, Length: {}", packet_header.id, packet_header.length);
+                            match packet_header.id {
+                            
+                                _ => debug!("Incoming login packet unhandled; ID: {}, Length: {}", packet_header.id, packet_header.length)
+                            
+                            }
                         
                         } else if self.state == ConnectionState::STATUS {
                         
-                            debug!("Incoming status packet unhandled; ID: {}, Length: {}", packet_header.id, packet_header.length);
+                            match packet_header.id {
+                            
+                                _ => debug!("Incoming status packet unhandled; ID: {}, Length: {}", packet_header.id, packet_header.length)
+                            
+                            }
                         
                         } else if self.state == ConnectionState::PLAY {
                         
-                            debug!("Incoming play packet unhandled; ID: {}, Length: {}", packet_header.id, packet_header.length);
+                            match packet_header.id {
+                            
+                                _ => debug!("Incoming play packet unhandled; ID: {}, Length: {}", packet_header.id, packet_header.length)
+                            
+                            }
                         
                         }
                         /*
