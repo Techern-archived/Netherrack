@@ -7,14 +7,19 @@ use super::super::PacketHeader;
 /// A packet sent from the client to initiate a handshake
 pub struct HandshakePacket {
 
+    /// The header of this HandshakePacket
     pub header: PacketHeader,
     
+    /// The protocol version that the client is using
     pub protocol_version: u32,
     
+    /// The address the client is using to connect to the server
     pub server_address: String,
     
+    /// The port the client is connecting to the server with
     pub server_port: u16,
     
+    /// The next state requested by the client
     pub next_state: u32
 
 }
