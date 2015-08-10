@@ -8,7 +8,7 @@ use self::bit_utils::BitInformation;
 /// A buffer that is backed by a VecDeque\<u8\>
 pub struct DequeBuffer {
     
-    data: VecDeque<u8>
+    pub data: VecDeque<u8>
     
 }
 
@@ -61,6 +61,19 @@ impl DequeBuffer {
             }
             
         }
+    }
+    
+    /// Writes a UTF-8 string into the buffer
+    pub fn write_utf8_string(&mut self, value: String) {
+    
+        let mut bytes: Vec<u8> = value.into_bytes();
+        
+        self.write_unsigned_varint_32(bytes.len() as u32);
+        
+        for byte in bytes {
+            self.write_unsigned_byte(byte);
+        }
+    
     }
 
     /// Reads an unsigned byte from the buffer, returning 0 if no data is available

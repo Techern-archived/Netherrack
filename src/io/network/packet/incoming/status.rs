@@ -31,7 +31,7 @@ impl StatusRequestPacket {
     pub fn handle(&self, connection: &mut GameConnection) {
         info!("Got a status request!");
         
-        
+        super::super::outgoing::status::StatusResponsePacket::new().send(connection);
     }
 
 }

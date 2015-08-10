@@ -1,6 +1,7 @@
 //! Functions relating to network packets
 
 pub mod incoming;
+pub mod outgoing;
 
 pub use super::game_connection::GameConnection;
 pub use super::deque_buffer::DequeBuffer;
