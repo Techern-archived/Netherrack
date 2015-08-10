@@ -53,11 +53,13 @@ impl StatusResponsePacket {
         
         data_buffer.write_utf8_string(self.get_json_response());
         
-        let mut length_buffer = DequeBuffer::with_capacity(data_buffer.remaining());
+        let mut length_buffer = DequeBuffer::new();
         
         length_buffer.write_unsigned_varint_32(data_buffer.remaining() as u32); //TODO: Try to get this as write_unsigned_varint_32_front
         
         let buffer = &(length_buffer.data.iter().chain(data_buffer.data.iter()).collect::<Vec<&u8>>())[..];
+        
+        debug!("Oh {:?}!", buffer);
               
         let _buffer: &[u8] = unsafe { transmute(buffer) };  
                 
