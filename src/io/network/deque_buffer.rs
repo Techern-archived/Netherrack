@@ -22,9 +22,19 @@ impl DequeBuffer {
     pub fn from(deque: VecDeque<u8>) -> DequeBuffer {
         DequeBuffer { data: deque }
     }
+    
+    /// Creates a new empty DequeBuffer
+    pub fn new() -> DequeBuffer {
+        DequeBuffer { data: VecDeque::<u8>::new() }
+    }
+    
+    /// Creates a new empty DequeBuffer with the specified initial capacity
+    pub fn with_capacity(capacity: usize) -> DequeBuffer {
+        DequeBuffer { data: VecDeque::<u8>::with_capacity(capacity) }
+    }
 
     /// Gets the remaining bytes in this DequeBuffer
-    pub fn remaining(&mut self) -> usize {
+    pub fn remaining(&self) -> usize {
         self.data.len()
     }
     
@@ -120,6 +130,27 @@ impl DequeBuffer {
             return Err("Reached end of buffer while reading a varint32");
             
         }
+    }
+
+}
+
+#[cfg(test)]
+mod tests {
+
+    use super::*;
+
+    #[test]
+    fn new_contains_no_elements() {
+        let new = DequeBuffer::new();
+        
+        assert_eq!(0, new.remaining());
+    }
+
+    #[test]
+    fn new_with_capacity_contains_no_elements() {
+        let new = DequeBuffer::with_capacity(25000); //WOW, MUCH BIG PACKET
+        
+        assert_eq!(0, new.remaining());
     }
 
 }
