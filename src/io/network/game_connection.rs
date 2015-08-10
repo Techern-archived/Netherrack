@@ -4,7 +4,8 @@ extern crate chrono;
 use self::chrono::duration::Duration;
 
 use super::packet::{ PacketHeader,
-                     ID_HANDSHAKE_CTS_HANDSHAKING 
+                     ID_HANDSHAKE_CTS_HANDSHAKING,
+                     ID_STATUS_CTS_REQUEST
                    };
 
 use std::collections::VecDeque;
@@ -151,6 +152,9 @@ impl GameConnection {
                         
                             match packet_header.id {
                             
+                                ID_STATUS_CTS_REQUEST => {
+                                    super::packet::incoming::status::StatusRequestPacket::decode(packet_header, self, &mut buffer).handle(self);
+                                },
                                 _ => debug!("Incoming status packet unhandled; ID: {}, Length: {}", packet_header.id, packet_header.length)
                             
                             }

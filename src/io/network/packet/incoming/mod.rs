@@ -3,6 +3,7 @@
 //! Any unimplemented packets currently print out the ID and length for future reference (see game_connection.rs)
 
 pub mod handshake;
+pub mod status;
 
 /*
 //! A packet
