@@ -1,13 +1,11 @@
-//! A Netherrack buffer backed by a VecDeque::<u8>
+//! A Netherrack buffer backed by a VecDeque\<u8\>
 
 use std::collections::VecDeque;
 
 extern crate bit_utils;
 use self::bit_utils::BitInformation;
 
-/// Defines a DequeBuffer
-///
-/// At some stage in the future, this will be changed to inherit the trait NetherrackBuffer<(Something extending Read and Write), but for now, we'll do everything here
+/// A buffer that is backed by a VecDeque\<u8\>
 pub struct DequeBuffer {
     
     data: VecDeque<u8>
