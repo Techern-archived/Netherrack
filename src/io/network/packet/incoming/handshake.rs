@@ -1,7 +1,7 @@
 //! A handshake request packet
 
 use super::super::super::deque_buffer::DequeBuffer;
-use super::super::super::game_connection::GameConnection; //It's super super super effective!
+use super::super::super::game_connection::{ConnectionState, GameConnection}; //It's super super super effective!
 use super::super::PacketHeader;
 
 /// A packet sent from the client to initiate a handshake
@@ -50,8 +50,24 @@ impl HandshakePacket {
         
     }
     
+    /// Handles this HandshakePacket
     pub fn handle(&self, connection: &mut GameConnection) {
-        info!("Handling handshake!");
+        info!("Got a handshake packet!");
+        
+        match self.next_state {
+        
+            1 => {
+                connection.state = ConnectionState::STATUS;
+            },
+            2 => {
+                connection.state = ConnectionState::LOGIN;
+            }
+            _ => {
+                error!("Invalid handshake next state of {}, disconnecting", self.next_state);
+                connection.disconnect();
+            }
+        
+        }
     }
 
 }
