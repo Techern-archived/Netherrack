@@ -6,8 +6,6 @@ pub mod handshake;
 pub mod status;
 
 /*
-//! A packet
-
 use super::super::super::deque_buffer::DequeBuffer;
 use super::super::super::game_connection::GameConnection; //It's super super super effective!
 use super::super::PacketHeader;
