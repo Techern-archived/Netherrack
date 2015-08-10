@@ -1,7 +1,7 @@
 //! Handles all status packets
 
 use super::super::super::deque_buffer::DequeBuffer;
-use super::super::super::game_connection::{ConnectionState, GameConnection}; //It's super super super effective!
+use super::super::super::game_connection::GameConnection; //It's super super super effective!
 use super::super::PacketHeader;
 
 /// A packet sent from the client to make the server send a status response packet
