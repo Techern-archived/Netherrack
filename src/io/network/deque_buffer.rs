@@ -152,5 +152,31 @@ mod tests {
         
         assert_eq!(0, new.remaining());
     }
+    
+    #[test]
+    fn unsigned_byte() {
+        let mut buffer = DequeBuffer::with_capacity(2);
+        
+        buffer.write_unsigned_byte(1);
+        buffer.write_unsigned_byte(15);
+        
+        assert_eq!(2, buffer.remaining());
+        
+        assert_eq!(1, buffer.read_unsigned_byte());
+        assert_eq!(15, buffer.read_unsigned_byte());
+    }
+    
+    #[test]
+    fn signed_byte() {
+        let mut buffer = DequeBuffer::with_capacity(2);
+        
+        buffer.write_signed_byte(-50);
+        buffer.write_signed_byte(0);
+        
+        assert_eq!(2, buffer.remaining());
+        
+        assert_eq!(-50, buffer.read_signed_byte());
+        assert_eq!(-0, buffer.read_signed_byte());
+    }
 
 }
