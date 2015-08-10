@@ -28,9 +28,7 @@ impl HandshakePacket {
 
     /// Decodes this HandshakePacket
     pub fn decode(header: PacketHeader, connection: &mut GameConnection, buffer: &mut DequeBuffer) -> HandshakePacket {
-        
-        let header = header;
-        
+                
         let protocol_result = buffer.read_unsigned_varint_32();
         
         if protocol_result.is_err() {

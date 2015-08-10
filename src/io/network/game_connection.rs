@@ -132,7 +132,9 @@ impl GameConnection {
                         
                             match packet_header.id {
                             
-                                ID_HANDSHAKE_CTS_HANDSHAKING => super::packet::incoming::handshake::HandshakePacket::decode(packet_header, self, &mut buffer).handle(self),
+                                ID_HANDSHAKE_CTS_HANDSHAKING => {
+                                    super::packet::incoming::handshake::HandshakePacket::decode(packet_header, self, &mut buffer).handle(self);
+                                },
                                 _ => debug!("Incoming handshake packet unhandled; ID: {}, Length: {}", packet_header.id, packet_header.length)
                             
                             }
