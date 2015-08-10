@@ -127,7 +127,7 @@ impl GameConnection {
                             break;
                         }
                         
-                        let packet_header = PacketHeader { length: length_result.unwrap(), id: id_result.unwrap() };
+                        let packet_header = PacketHeader::new(length_result.unwrap(), id_result.unwrap());
                         
                         if self.state == ConnectionState::HANDSHAKE {
                         

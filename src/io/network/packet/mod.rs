@@ -17,6 +17,15 @@ pub struct PacketHeader {
     
 }
 
+impl PacketHeader {
+
+    /// Creates a new PacketHeader
+    pub fn new(length: u32, id: u32) -> PacketHeader {
+        PacketHeader { length: length, id: id }
+    }
+
+}
+
 /// The ID of a handshake packet
 pub const ID_HANDSHAKE_CTS_HANDSHAKING: u32 = 0x00;
 
