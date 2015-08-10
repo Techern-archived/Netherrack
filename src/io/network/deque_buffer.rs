@@ -101,6 +101,31 @@ impl DequeBuffer {
         self.data.push_back(value as u8);
     }
     
+    /// Writes an unsigned 32-bit Varint from the buffer
+    pub fn write_unsigned_varint_32(&mut self, value: u32) {
+    
+        let mut _value: u32 = value;
+    
+        if value == 0 {
+            self.write_unsigned_byte(0);
+        } else {
+            
+            while _value >= 0b10000000 {
+                
+                let next_byte: u8 = ((_value & 0b01111111) as u8) | 0b10000000;
+                
+                _value = _value >> 7;
+                
+                self.write_unsigned_byte(next_byte);
+                
+            }
+            
+            self.write_unsigned_byte((_value & 0b01111111) as u8);
+            
+        }
+    
+    }
+    
     /// Reads an unsigned Varint from the buffer
     pub fn read_unsigned_varint_32(&mut self) -> Result<u32, &'static str> {
         if self.remaining() == 0 {
@@ -177,6 +202,30 @@ mod tests {
         
         assert_eq!(-50, buffer.read_signed_byte());
         assert_eq!(-0, buffer.read_signed_byte());
+    }
+    
+    #[test]
+    fn unsigned_varint_32() {
+        
+        let mut buffer = DequeBuffer::new();
+        
+        let var1: u32 = 0;
+        
+        let var2: u32 = 4003254234;
+        
+        let var3: u32 = 200;
+        
+        buffer.write_unsigned_varint_32(var1);
+        buffer.write_unsigned_varint_32(var2);
+        buffer.write_unsigned_varint_32(var3);
+        
+        assert_eq!(8, buffer.remaining());
+        
+        // No need to check for okay here, we know it will be. If you're getting it from the client, always check!
+        assert_eq!(var1, buffer.read_unsigned_varint_32().unwrap());
+        assert_eq!(var2, buffer.read_unsigned_varint_32().unwrap());
+        assert_eq!(var3, buffer.read_unsigned_varint_32().unwrap());
+        
     }
 
 }
