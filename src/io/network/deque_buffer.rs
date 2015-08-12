@@ -2,6 +2,8 @@
 
 use std::collections::VecDeque;
 
+extern crate varint;
+
 extern crate bit_utils;
 use self::bit_utils::BitInformation;
 
@@ -67,8 +69,10 @@ impl DequeBuffer {
     pub fn write_utf8_string(&mut self, value: String) {
     
         let mut bytes: Vec<u8> = value.into_bytes();
-        
+                
         self.write_unsigned_varint_32(bytes.len() as u32);
+        
+        info!("Length is {}", bytes.len() as u32);
         
         for byte in bytes {
             self.write_unsigned_byte(byte);
@@ -110,6 +114,13 @@ impl DequeBuffer {
     /// Writes a signed byte to the buffer
     pub fn write_signed_byte(&mut self, value: i8) {
         self.data.push_back(value as u8);
+    }
+    
+    /// Writes a signed varint 32 to the buffer
+    pub fn write_signed_varint_32(&mut self, value: i32) {
+        
+        self.write_unsigned_varint_32(self::varint::zigzag_signed_int(value));
+        
     }
     
     /// Writes an unsigned 32-bit Varint from the buffer
