@@ -3,6 +3,7 @@
 use std::collections::VecDeque;
 
 extern crate varint;
+use self::varint::{Varint, encode_unsigned_varint32};
 
 extern crate bit_utils;
 use self::bit_utils::BitInformation;
@@ -126,9 +127,30 @@ impl DequeBuffer {
     /// Writes an unsigned 32-bit Varint from the buffer
     pub fn write_unsigned_varint_32(&mut self, value: u32) {
     
-        let mut _value: u32 = value;
+        let mut varint = encode_unsigned_varint32(150);
+        
+        info!("Varint has {} bytes", varint.number_of_bytes());
+        
+        info!("Was {:?}", varint.data);
+        
+        //TODO: Once stable, do: self.data.append(&mut varint.data);
+        
+        while (varint.data.len() > 0) {
+        
+            match varint.data.pop_front() {
+                Some(value) => {
+                    self.data.push_back(value);
+                }
+                None => {
+                    error!("No data left in Varint's buffer");
+                }
+            }
+        
+        }
+        
+        info!("Is now {:?}", self.data);
     
-        if value == 0 {
+        /*if value == 0 {
             self.write_unsigned_byte(0);
         } else {
             
@@ -147,7 +169,7 @@ impl DequeBuffer {
             debug!("Writing last byte of value: {} is {}", _value, _value & 0b01111111);
             self.write_unsigned_byte((_value & 0b01111111) as u8);
             
-        }
+        }*/
     
     }
     
