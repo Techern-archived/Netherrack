@@ -1,5 +1,8 @@
 //! Entry module for the Netherrack project
 
+// We'll be using serialization a lot
+extern crate rustc_serialize;
+
 // Enable logging and use of logging macros throughout Netherrack
 #[macro_use]
 extern crate log;

@@ -29,7 +29,7 @@ impl StatusResponsePacket {
     \"players\": {
         \"max\": 100,
         \"online\": 5
-    },	
+    },
     \"description\": {
         \"text\": \"Hello world\"
     }

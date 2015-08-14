@@ -68,13 +68,13 @@ impl DequeBuffer {
     /// Writes a UTF-8 string into the buffer
     pub fn write_utf8_string(&mut self, value: String) {
     
-        let mut bytes: Vec<u8> = value.into_bytes();
+        let mut bytes = value.as_bytes();
                 
         self.write_unsigned_varint_32(bytes.len() as u32);
         
         info!("Length is {}", bytes.len() as u32);
         
-        for byte in bytes {
+        for &byte in bytes {
             self.write_unsigned_byte(byte);
         }
     
@@ -133,6 +133,8 @@ impl DequeBuffer {
         } else {
             
             while _value >= 0b10000000 {
+            
+                debug!("Value is {}, writing {}", (_value & 0xff) as u8, _value as u8);
                 
                 let next_byte: u8 = ((_value & 0b01111111) as u8) | 0b10000000;
                 
@@ -142,6 +144,7 @@ impl DequeBuffer {
                 
             }
             
+            debug!("Writing last byte of value: {} is {}", _value, _value & 0b01111111);
             self.write_unsigned_byte((_value & 0b01111111) as u8);
             
         }
