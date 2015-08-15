@@ -19,6 +19,7 @@ impl StatusRequestPacket {
     /// **DO NOT DO ANYTHING EXCEPT DECODING!**
     ///
     /// Actual functionality will be handled in the handle function
+    #[allow(unused_variables)]
     pub fn decode(header: PacketHeader, connection: &mut GameConnection, buffer: &mut DequeBuffer) -> StatusRequestPacket {
                 
         // Nothing to do here

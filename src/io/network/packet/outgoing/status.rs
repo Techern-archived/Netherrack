@@ -1,11 +1,10 @@
 /// Implements all outgoing status packets
 
 use std::io::Write;
-use std::mem::transmute;
 
 use super::super::super::deque_buffer::DequeBuffer;
 use super::super::super::game_connection::GameConnection; //It's super super super effective!
-use super::super::{ PacketHeader, ID_STATUS_STC_RESPONSE };
+use super::super::{ ID_STATUS_STC_RESPONSE };
 
 /// A packet sent from the server to 
 pub struct StatusResponsePacket;
@@ -63,7 +62,7 @@ impl StatusResponsePacket {
         
         let result = connection.stream.write(_buffer);
         
-        if (result.is_ok()) {
+        if result.is_ok() {
             info!("Flush? {:?}", connection.stream.flush());
         }
         

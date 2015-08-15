@@ -68,7 +68,7 @@ impl DequeBuffer {
     /// Writes a UTF-8 string into the buffer
     pub fn write_utf8_string(&mut self, value: String) {
     
-        let mut bytes = value.as_bytes();
+        let bytes = value.as_bytes();
                 
         self.write_unsigned_varint_32(bytes.len() as u32);
         
