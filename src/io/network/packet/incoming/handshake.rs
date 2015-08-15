@@ -49,16 +49,17 @@ impl HandshakePacket {
             connection.disconnect();
         }
         
-        debug!("Protocol version {}, hostname: {}, port: {}, next_state: {}", protocol_result.unwrap(), hostname, port, next_state_result.unwrap());
-        
         HandshakePacket { header: header, protocol_version: protocol_result.unwrap(), server_address: hostname, server_port: port, next_state: next_state_result.unwrap() }
         
     }
     
     /// Handles this HandshakePacket
     pub fn handle(&self, connection: &mut GameConnection) {
-        info!("Got a handshake packet!");
-        
+    
+        if self.server_address.ends_with("\0FML\0") {
+            connection.forge_enabled = true;
+        }
+    
         match self.next_state {
         
             1 => {

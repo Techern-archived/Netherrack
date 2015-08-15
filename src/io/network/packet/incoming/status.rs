@@ -30,8 +30,6 @@ impl StatusRequestPacket {
     
     /// Handles this StatusRequestPacket
     pub fn handle(&self, connection: &mut GameConnection) {
-        info!("Got a status request!");
-        
         super::super::outgoing::status::StatusResponsePacket::new().send(connection);
     }
 
@@ -66,8 +64,6 @@ impl ListPingPacket {
     
     /// Handles this ListPingPacket
     pub fn handle(&self, connection: &mut GameConnection) {
-        info!("Got a packet! ID is {}", self.payload);
-        
         super::super::outgoing::status::ListPongPacket::new(self.payload).send(connection);
     }
 
