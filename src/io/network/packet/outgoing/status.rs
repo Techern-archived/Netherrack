@@ -6,6 +6,111 @@ use super::super::super::deque_buffer::DequeBuffer;
 use super::super::super::game_connection::GameConnection; //It's super super super effective!
 use super::super::{ ID_STATUS_STC_RESPONSE, ID_STATUS_STC_PONG };
 
+use rustc_serialize::json;
+
+mod response {
+
+    use super::super::super::super::super::super::{get_version, MINECRAFT_PROTOCOL_VERSION};
+    use super::super::super::super::super::super::universe::{MAX_PLAYERS};
+
+    /// A response to be sent by the server list response packet
+    #[derive(Debug, RustcDecodable, RustcEncodable)]
+    pub struct Response {
+    
+        /// The player data contained in this response
+        pub players: Players,
+        
+        /// The version data contained in this response
+        pub version: Version,
+        
+        /// The description contained in this response
+        pub description: Description
+    
+    }
+    
+    impl Response {
+    
+        /// Constructs a new Response
+        pub fn construct() -> Response {
+        
+            Response { players: Players::construct(), version: Version::construct(), description: Description::construct() }
+            
+        }
+    
+    }
+    
+    /// A struct defining the players portion of the StatusResponsePacket
+    #[derive(Debug, RustcDecodable, RustcEncodable)]
+    pub struct Players {
+        
+        /// The maximum number of players allowed on this server
+        pub max: i32, //Yes, I know. But Java only supports signed integers
+        
+        /// The current number of online players
+        pub online: i32
+        
+    }
+    
+    impl Players {
+    
+        /// Constructs a new Players struct
+        ///
+        /// TODO: Make this use real data for online
+        pub fn construct() -> Players {
+        
+            Players { max: MAX_PLAYERS, online: 0 }
+        
+        }
+    
+    }
+    
+    /// The version part of the response packet
+    #[derive(Debug, RustcDecodable, RustcEncodable)]
+    pub struct Version {
+    
+        /// The name of the version (This may or may not be ignored)
+        pub name: String,
+        
+        /// The Minecraft protocol number being used
+        pub protocol: u32
+    
+    }
+    
+    impl Version {
+    
+        /// Constructs a new Version struct
+        ///
+        /// TODO: Make name use a defined value
+        pub fn construct() -> Version {
+        
+            Version { name: "1.8.8".to_string(), protocol: MINECRAFT_PROTOCOL_VERSION }
+        
+        }
+    
+    }
+    
+    /// The description part of the response packet
+    #[derive(Debug, RustcDecodable, RustcEncodable)]
+    pub struct Description {
+        
+        /// The text to display
+        pub text: String
+    
+    }
+    
+    impl Description {
+    
+        /// Constructs a new Description.
+        ///
+        /// In the future, this will get the description from a (cached) file
+        pub fn construct() -> Description {
+            Description { text: format!("A Netherrack {} server", get_version()) }
+        }
+    
+    }
+
+}
+
 /// A packet sent from the server to 
 pub struct StatusResponsePacket;
 
@@ -20,19 +125,7 @@ impl StatusResponsePacket {
     
     /// Gets the JSON response
     fn get_json_response(&self) -> String {
-"{
-    \"version\": {
-        \"name\": \"1.8.8\",
-        \"protocol\": 47
-    },
-    \"players\": {
-        \"max\": 100,
-        \"online\": 5
-    },
-    \"description\": {
-        \"text\": \"Hello world\"
-    }
-}".to_string()
+        json::encode(&response::Response::construct()).unwrap()
     }
 
     /// Creates a new Packet

@@ -10,4 +10,4 @@ pub const MAX_WORLDS: u8 = 16;
 /// The maximum number of players accepted by this universe
 ///
 /// This is to be tested and will be set to a user-defined value (or perhaps automatically depending on hardware) prior to release
-pub const MAX_PLAYERS: u16 = 200;
+pub const MAX_PLAYERS: i32 = 200;
