@@ -23,6 +23,9 @@ pub mod universe;
 
 // Okay, this is the start of Netherrack's functions
 
+/// The version of the Minecraft protocol accepted by Netherrack
+pub const MINECRAFT_PROTOCOL_VERSION: u32 = 47;
+
 /// The version of Netherrack as determined at compile time
 pub const NETHERRACK_VERSION_STRING: &'static str = env!("CARGO_PKG_VERSION");
 
