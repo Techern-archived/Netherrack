@@ -42,7 +42,12 @@ pub struct GameConnection {
     pub stream: TcpStream,
     
     /// The state of this GameConnection
-    pub state: ConnectionState
+    pub state: ConnectionState,
+    
+    /// Whether the client has the Forge Mod Loader injected into it
+    ///
+    /// This may change in 1.9 as FML is being destroyed and Forge is becoming the norm
+    pub forge_enabled: bool
 
 }
 
@@ -52,7 +57,8 @@ impl GameConnection {
     pub fn new(stream: TcpStream) -> GameConnection {
         GameConnection {
             stream: stream,
-            state: ConnectionState::HANDSHAKE
+            state: ConnectionState::HANDSHAKE,
+            forge_enabled: false
         }
     }
     
