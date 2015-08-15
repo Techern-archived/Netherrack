@@ -20,7 +20,7 @@ pub struct Packet {
 impl Packet {
 
     /// Gets this Packet's ID
-    pub fn get_id() -> u32 {
+    pub fn get_id(&self) -> u32 {
     
         ID_STC_
     
@@ -35,7 +35,6 @@ impl Packet {
     
     /// Encodes and sends this Packet
     pub fn send(&self, connection: &mut GameConnection) {
-        info!("Sending a packet!");
         
         let mut data_buffer = DequeBuffer::new();
         
@@ -51,13 +50,9 @@ impl Packet {
         
         let _buffer: &[u8] = &buffer[..];
         
-        let result = connection.stream.write(_buffer);
-        
-        if result.is_ok() {
-            trace!("Flush? {:?}", connection.stream.flush());
+        if connection.stream.write(_buffer).is_ok() {
+            let _ = connection.stream.flush();
         }
-        
-        info!("Wrote a {:?}", result);
         
     }
 

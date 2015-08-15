@@ -5,7 +5,7 @@ use self::chrono::duration::Duration;
 
 use super::packet::{ PacketHeader,
                      ID_HANDSHAKE_CTS_HANDSHAKING,
-                     ID_STATUS_CTS_REQUEST
+                     ID_STATUS_CTS_REQUEST, ID_STATUS_CTS_PING
                    };
 
 use std::collections::VecDeque;
@@ -155,7 +155,10 @@ impl GameConnection {
                                 ID_STATUS_CTS_REQUEST => {
                                     super::packet::incoming::status::StatusRequestPacket::decode(packet_header, self, &mut buffer).handle(self);
                                 },
-                                _ => debug!("Incoming status packet unhandled; ID: {}, Length: {}", packet_header.id, packet_header.length)
+                                ID_STATUS_CTS_PING => {
+                                    super::packet::incoming::status::ListPingPacket::decode(packet_header, self, &mut buffer).handle(self);
+                                },
+                                _ => debug!("Incoming play packet unhandled; ID: {}, Length: {}", packet_header.id, packet_header.length)
                             
                             }
                         

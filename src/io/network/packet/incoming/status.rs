@@ -36,3 +36,39 @@ impl StatusRequestPacket {
     }
 
 }
+
+/// A list ping packet sent from the client to the server
+pub struct ListPingPacket {
+
+    /// The header of this ListPingPacket
+    pub header: PacketHeader,
+    
+    /// The ping ID (usually the system time in milliseconds)
+    pub payload: i64
+
+}
+
+impl ListPingPacket {
+
+    /// Decodes this Packet
+    ///
+    /// **DO NOT DO ANYTHING EXCEPT DECODING!**
+    ///
+    /// Actual functionality will be handled in the handle function
+    #[allow(unused_variables)]
+    pub fn decode(header: PacketHeader, connection: &mut GameConnection, buffer: &mut DequeBuffer) -> ListPingPacket {
+                
+        let id: i64 = buffer.read_signed_long();
+        
+        ListPingPacket { header: header, payload: id }
+        
+    }
+    
+    /// Handles this ListPingPacket
+    pub fn handle(&self, connection: &mut GameConnection) {
+        info!("Got a packet! ID is {}", self.payload);
+        
+        super::super::outgoing::status::ListPongPacket::new(self.payload).send(connection);
+    }
+
+}

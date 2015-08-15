@@ -104,7 +104,7 @@ impl DequeBuffer {
         
     }
     
-    /// Reads an unsigned long from the buffer
+    /// Reads a signed long from the buffer
     pub fn read_signed_long(&mut self) -> i64 {
     
         return ((self.read_unsigned_byte() as i64) << 56) |
@@ -117,6 +117,18 @@ impl DequeBuffer {
                (self.read_unsigned_byte() as i64);
                
     
+    }
+    
+    /// Writes a signed long to the buffer
+    pub fn write_signed_long(&mut self, value: i64) {
+        self.write_unsigned_byte((value >> 56) as u8);
+        self.write_unsigned_byte((value >> 48) as u8);
+        self.write_unsigned_byte((value >> 40) as u8);
+        self.write_unsigned_byte((value >> 32) as u8);
+        self.write_unsigned_byte((value >> 24) as u8);
+        self.write_unsigned_byte((value >> 16) as u8);
+        self.write_unsigned_byte((value >> 8) as u8);
+        self.write_unsigned_byte(value as u8);
     }
     
     /// Writes an unsigned byte to the buffer
