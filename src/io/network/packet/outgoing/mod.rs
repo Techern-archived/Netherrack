@@ -41,22 +41,20 @@ impl Packet {
         
         data_buffer.write_unsigned_varint_32(self.get_id());
         
-        // Write your data here
+        //Write your data here
         
-        let mut length_buffer = DequeBuffer::with_capacity(data_buffer.remaining());
+        let mut length_buffer = DequeBuffer::new();
         
         length_buffer.write_unsigned_varint_32(data_buffer.remaining() as u32); //TODO: Try to get this as write_unsigned_varint_32_front
         
-        let buffer = &(length_buffer.data.iter().chain(data_buffer.data.iter()).collect::<Vec<&u8>>())[..];
-              
-        let _buffer: &[u8] = unsafe { transmute(buffer) };  
-                
-        info!("{} + {} = {}", length_buffer.remaining(), data_buffer.remaining(), _buffer.len());
+        let buffer: Vec<u8> = length_buffer.data.into_iter().chain(data_buffer.data.into_iter()).collect();
         
-        let result = connection.stream.write_all(_buffer);
+        let _buffer: &[u8] = &buffer[..];
         
-        if (result.is_ok()) {
-            connection.stream.flush();
+        let result = connection.stream.write(_buffer);
+        
+        if result.is_ok() {
+            trace!("Flush? {:?}", connection.stream.flush());
         }
         
         info!("Wrote a {:?}", result);

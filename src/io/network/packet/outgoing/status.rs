@@ -63,7 +63,7 @@ impl StatusResponsePacket {
         let result = connection.stream.write(_buffer);
         
         if result.is_ok() {
-            info!("Flush? {:?}", connection.stream.flush());
+            trace!("Flush? {:?}", connection.stream.flush());
         }
         
         info!("Wrote a {:?}", result);
