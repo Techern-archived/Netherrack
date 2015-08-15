@@ -2,6 +2,12 @@
 
 use std::collections::VecDeque;
 
+extern crate varint;
+use self::varint::{Varint, encode_unsigned_varint32};
+
+extern crate bit_utils;
+use self::bit_utils::BitInformation;
+
 /// A buffer that is backed by a VecDeque\<u8\>
 pub struct DequeBuffer {
     
@@ -114,20 +120,88 @@ impl DequeBuffer {
     /// Writes a signed varint 32 to the buffer
     pub fn write_signed_varint_32(&mut self, value: i32) {
         
-        error!("Nothing pending rewrite");
+        self.write_unsigned_varint_32(self::varint::zigzag_signed_int(value));
         
     }
     
     /// Writes an unsigned 32-bit Varint from the buffer
     pub fn write_unsigned_varint_32(&mut self, value: u32) {
     
-        error!("Not implemented due to current rewrite");
+        let mut varint = encode_unsigned_varint32(150);
+        
+        info!("Varint has {} bytes", varint.number_of_bytes());
+        
+        info!("Was {:?}", varint.data);
+        
+        //TODO: Once stable, do: self.data.append(&mut varint.data);
+        
+        while (varint.data.len() > 0) {
+        
+            match varint.data.pop_front() {
+                Some(value) => {
+                    self.data.push_back(value);
+                }
+                None => {
+                    error!("No data left in Varint's buffer");
+                }
+            }
+        
+        }
+        
+        info!("Is now {:?}", self.data);
+    
+        /*if value == 0 {
+            self.write_unsigned_byte(0);
+        } else {
+            
+            while _value >= 0b10000000 {
+            
+                debug!("Value is {}, writing {}", (_value & 0xff) as u8, _value as u8);
+                
+                let next_byte: u8 = ((_value & 0b01111111) as u8) | 0b10000000;
+                
+                _value = _value >> 7;
+                
+                self.write_unsigned_byte(next_byte);
+                
+            }
+            
+            debug!("Writing last byte of value: {} is {}", _value, _value & 0b01111111);
+            self.write_unsigned_byte((_value & 0b01111111) as u8);
+            
+        }*/
     
     }
     
     /// Reads an unsigned Varint from the buffer
     pub fn read_unsigned_varint_32(&mut self) -> Result<u32, &'static str> {
-        return Err("Nothing, pending rewrite");
+        if self.remaining() == 0 {
+            return Err("Cannot read a Varint with no data to read.");
+        } else {
+            // The number of bits to shift by. <<0, <<7, <<14, etc
+            let mut shift_amount: u32 = 0;
+            
+            // The decoded value
+            let mut decoded_value: u32 = 0;
+            
+            while self.remaining() >= 1 {
+            
+                let byte_value: u8 = self.read_unsigned_byte(); //Yay for this existing!
+                
+                decoded_value |= ((byte_value & 0b01111111) as u32) << shift_amount; // We're not shifting for the first byte ;)
+                
+                // See if we're still reading bytes
+                if byte_value.has_most_signifigant_bit() {
+                    shift_amount += 7;
+                } else {
+                    return Ok(decoded_value);
+                }
+            
+            }
+            
+            return Err("Reached end of buffer while reading a varint32");
+            
+        }
     }
 
 }
@@ -176,7 +250,7 @@ mod tests {
         assert_eq!(-50, buffer.read_signed_byte());
         assert_eq!(-0, buffer.read_signed_byte());
     }
-    /*
+    
     #[test]
     fn unsigned_varint_32() {
         
@@ -199,6 +273,6 @@ mod tests {
         assert_eq!(var2, buffer.read_unsigned_varint_32().unwrap());
         assert_eq!(var3, buffer.read_unsigned_varint_32().unwrap());
         
-    }*/
+    }
 
 }
