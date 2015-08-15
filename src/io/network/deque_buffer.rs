@@ -1,12 +1,6 @@
 //! A Netherrack buffer backed by a VecDeque\<u8\>
 
-extern crate protobuf;
-
-use self::protobuf::{CodedInputStream};
-
 use std::collections::VecDeque;
-use std::io::{Cursor, Read};
-use std::mem::transmute;
 
 /// A buffer that is backed by a VecDeque\<u8\>
 pub struct DequeBuffer {
@@ -133,18 +127,6 @@ impl DequeBuffer {
     
     /// Reads an unsigned Varint from the buffer
     pub fn read_unsigned_varint_32(&mut self) -> Result<u32, &'static str> {
-    
-        // First, we clone the data
-        let clone: VecDeque<u8> = self.data.clone();
-        
-        let clone = &(clone.iter().collect::<Vec<&u8>>())[..];
-        
-        debug!("Oh {:?}!", clone);
-        
-        //let stream = CodedInputStream::new(Cursor::new(clone));
-            
-        error!("Nothing, pending rewrite ({:?})", &clone);
-    
         return Err("Nothing, pending rewrite");
     }
 
