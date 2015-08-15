@@ -57,15 +57,9 @@ impl StatusResponsePacket {
         
         length_buffer.write_unsigned_varint_32(data_buffer.remaining() as u32); //TODO: Try to get this as write_unsigned_varint_32_front
         
-        let buffer = &(length_buffer.data.iter().chain(data_buffer.data.iter()).collect::<Vec<&u8>>())[..];
+        let buffer: Vec<u8> = length_buffer.data.into_iter().chain(data_buffer.data.into_iter()).collect();
         
-        debug!("Oh {:?}!", buffer);
-              
-        let _buffer: &[u8] = unsafe { transmute(buffer) };  
-                
-        info!("{} + {} = {}", length_buffer.remaining(), data_buffer.remaining(), _buffer.len());
-        
-        info!("Flush? {:?}", connection.stream.flush());
+        let _buffer: &[u8] = &buffer[..];
         
         let result = connection.stream.write(_buffer);
         
