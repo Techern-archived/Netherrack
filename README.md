@@ -1,5 +1,5 @@
 ### Netherrack (Server)
-## A MineCraft server implementation programmed in Rust
+## A Minecraft server implementation programmed in Rust
 
 [![Build Status](https://travis-ci.org/Techern/Netherrack.svg?branch=master)](https://travis-ci.org/Techern/Netherrack)  [![Crates.io](https://img.shields.io/crates/v/netherrack.svg)](https://crates.io/crates/netherrack) 
 
