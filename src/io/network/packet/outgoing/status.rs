@@ -252,6 +252,8 @@ impl ListPongPacket {
             let _ = connection.stream.flush();
         }
         
+        connection.disconnect();
+        
     }
 
 }

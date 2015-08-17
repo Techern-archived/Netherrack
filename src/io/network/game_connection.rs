@@ -47,7 +47,10 @@ pub struct GameConnection {
     /// Whether the client has the Forge Mod Loader injected into it
     ///
     /// This may change in 1.9 as FML is being destroyed and Forge is becoming the norm
-    pub forge_enabled: bool
+    pub forge_enabled: bool,
+    
+    /// A boolean declaring if this GameConnection is connected
+    pub connected: bool
 
 }
 
@@ -58,7 +61,8 @@ impl GameConnection {
         GameConnection {
             stream: stream,
             state: ConnectionState::HANDSHAKE,
-            forge_enabled: false
+            forge_enabled: false,
+            connected: true //HURR DURR
         }
     }
     
@@ -69,6 +73,8 @@ impl GameConnection {
         if result.is_ok() == false {
             error!("Error disconnecting: {:?}", result);
         }
+        
+        self.connected = false;
         
     }
     
@@ -84,6 +90,11 @@ impl GameConnection {
             if timeout_duration.num_seconds() >= 10 {
                 info!("Client at {} timed out, dropping connection", self.stream.peer_addr().unwrap());
                 self.disconnect();
+                break;
+            }
+            
+            if !self.connected {
+                debug!("Client at {} was forcibly disconnected, maybe for a good reason", self.stream.peer_addr().unwrap());
                 break;
             }
         
@@ -185,8 +196,6 @@ impl GameConnection {
             }
         
         }
-        
-        info!("Connection closed");
         
     }
 
