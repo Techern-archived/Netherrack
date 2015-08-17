@@ -13,8 +13,6 @@ mod response {
     use super::super::super::super::super::super::{get_version, MINECRAFT_PROTOCOL_VERSION};
     use super::super::super::super::super::super::universe::{MAX_PLAYERS};
 
-    use super::super::super::super::game_connection::GameConnection;
-
     /// A response to be sent by the server list response packet
     #[derive(Debug, RustcDecodable, RustcEncodable)]
     pub struct Response {
@@ -36,7 +34,7 @@ mod response {
     impl Response {
     
         /// Constructs a new Response
-        pub fn construct(connection: &GameConnection) -> Response {
+        pub fn construct() -> Response {
             
             return Response { players: Players::construct(), version: Version::construct(), description: Description::construct(), modinfo: Some(ModInfo::construct())};
             
@@ -46,6 +44,7 @@ mod response {
     
     /// A struct containing mod (forge) information
     #[derive(Debug, RustcDecodable, RustcEncodable)]
+    #[allow(non_snake_case)]
     pub struct ModInfo {
     
         /// The type of mod loader compatibility being used
@@ -186,13 +185,12 @@ impl StatusResponsePacket {
     
     /// Encodes and sends this StatusResponsePacket
     pub fn send(&self, connection: &mut GameConnection) {
-        info!("Sending a server status response packet!");
         
         let mut data_buffer = DequeBuffer::new();
         
         data_buffer.write_unsigned_varint_32(self.get_id());
         
-        data_buffer.write_utf8_string(json::encode(&response::Response::construct(&connection)).unwrap().replace("_type", "type"));
+        data_buffer.write_utf8_string(json::encode(&response::Response::construct()).unwrap().replace("_type", "type"));
         
         let mut length_buffer = DequeBuffer::new();
         
