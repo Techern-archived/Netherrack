@@ -13,6 +13,8 @@ mod response {
     use super::super::super::super::super::super::{get_version, MINECRAFT_PROTOCOL_VERSION};
     use super::super::super::super::super::super::universe::{MAX_PLAYERS};
 
+    use super::super::super::super::game_connection::GameConnection;
+
     /// A response to be sent by the server list response packet
     #[derive(Debug, RustcDecodable, RustcEncodable)]
     pub struct Response {
@@ -24,16 +26,68 @@ mod response {
         pub version: Version,
         
         /// The description contained in this response
-        pub description: Description
+        pub description: Description,
+        
+        /// The optional / Forge-only mod information
+        pub modinfo: Option<ModInfo>
     
     }
     
     impl Response {
     
         /// Constructs a new Response
-        pub fn construct() -> Response {
+        pub fn construct(connection: &GameConnection) -> Response {
+            
+            return Response { players: Players::construct(), version: Version::construct(), description: Description::construct(), modinfo: Some(ModInfo::construct())};
+            
+        }
+    
+    }
+    
+    /// A struct containing mod (forge) information
+    #[derive(Debug, RustcDecodable, RustcEncodable)]
+    pub struct ModInfo {
+    
+        /// The type of mod loader compatibility being used
+        pub _type: String,
         
-            Response { players: Players::construct(), version: Version::construct(), description: Description::construct() }
+        /// The list of mods currently in use on the server
+        pub modList: Vec<ModDescriptor>
+    
+    }
+    
+    impl ModInfo {
+    
+        /// Constructs a new ModInfo struct
+        pub fn construct() -> ModInfo {
+        
+            ModInfo { _type: "FML".to_string(), modList: ModDescriptor::construct() }
+        
+        }
+    
+    }
+    
+    /// A struct containing mod information
+    #[derive(Debug, RustcDecodable, RustcEncodable)]
+    pub struct ModDescriptor {
+    
+        /// The mod's ID
+        pub modid: String,
+        
+        /// The mod's version
+        pub version: String
+    
+    }
+    
+    impl ModDescriptor {
+    
+        /// Constructs a new list of ModDescriptors
+        pub fn construct() -> Vec<ModDescriptor> {
+        
+            //TODO: One day, replace this with names of mods added
+            vec!(
+                ModDescriptor { modid: "ExampleMod".to_string(), version: "0.0.1-pre".to_string() }
+            )
             
         }
     
@@ -122,11 +176,6 @@ impl StatusResponsePacket {
         ID_STATUS_STC_RESPONSE
     
     }
-    
-    /// Gets the JSON response
-    fn get_json_response(&self) -> String {
-        json::encode(&response::Response::construct()).unwrap()
-    }
 
     /// Creates a new Packet
     pub fn new() -> StatusResponsePacket {
@@ -143,7 +192,7 @@ impl StatusResponsePacket {
         
         data_buffer.write_unsigned_varint_32(self.get_id());
         
-        data_buffer.write_utf8_string(self.get_json_response());
+        data_buffer.write_utf8_string(json::encode(&response::Response::construct(&connection)).unwrap().replace("_type", "type"));
         
         let mut length_buffer = DequeBuffer::new();
         
