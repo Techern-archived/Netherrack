@@ -46,7 +46,15 @@ pub trait OutgoingPacket {
         if connection.stream.write(_buffer).is_ok() {
             let _ = connection.stream.flush();
         }
+        
+        self.post_send(connection);
     
+    }
+    
+    #[allow(unused_variables)]
+    /// Called after the OutgoingPacket is sent
+    fn post_send(&self, connection: &mut GameConnection) {
+        // Do nothing, this may be expanded by default later
     }
 
 }
@@ -78,12 +86,16 @@ impl OutgoingPacket for Packet {
     
     }
 
+}
+
+impl Packet {
+
     /// Creates a new Packet
     pub fn new() -> Packet {
     
         Packet { /*etc*/ }
         
     }
-
+    
 }
 */

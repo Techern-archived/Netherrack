@@ -2,7 +2,11 @@
 
 use super::super::super::deque_buffer::DequeBuffer;
 use super::super::super::game_connection::GameConnection; //It's super super super effective!
+
 use super::super::PacketHeader;
+
+use super::super::outgoing::OutgoingPacket;
+use super::super::outgoing::status::StatusResponsePacket;
 
 /// A packet sent from the client to make the server send a status response packet
 pub struct StatusRequestPacket {
@@ -30,7 +34,7 @@ impl StatusRequestPacket {
     
     /// Handles this StatusRequestPacket
     pub fn handle(&self, connection: &mut GameConnection) {
-        super::super::outgoing::status::StatusResponsePacket::new().send(connection);
+        StatusResponsePacket::new().send(connection);
     }
 
 }
