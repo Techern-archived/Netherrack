@@ -1,7 +1,8 @@
 ### Netherrack (Server)
 ## A Minecraft server implementation programmed in Rust
 
-[![Build Status](https://travis-ci.org/Techern/Netherrack.svg?branch=master)](https://travis-ci.org/Techern/Netherrack)  [![Crates.io](https://img.shields.io/crates/v/netherrack.svg)](https://crates.io/crates/netherrack) 
+[![Build Status](https://travis-ci.org/Techern/Netherrack.svg?branch=master)](https://travis-ci.org/Techern/Netherrack)  [![Crates.io](https://img.shields.io/crates/v/netherrack.svg)](https://crates.io/crates/netherrack)
+[![Coverage Status](https://coveralls.io/repos/Techern/Netherrack/badge.svg?branch=master&service=github)](https://coveralls.io/github/Techern/Netherrack?branch=master)
 
 ## About Netherrack
 
@@ -39,7 +40,7 @@ Yes, please! There is still a **lot** of work required, and even a tiny bit help
 
 #### As a sponsor?
 
-Wow, I'm flattered, but we're not quite at that stage yet. 
+Wow, I'm flattered, but we're not quite at that stage yet.
 
 #### As a beta tester?
 
