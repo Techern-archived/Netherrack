@@ -11,16 +11,16 @@ pub struct HandshakePacket {
 
     /// The header of this HandshakePacket
     pub header: PacketHeader,
-    
+
     /// The protocol version that the client is using
     pub protocol_version: u32,
-    
+
     /// The address the client is using to connect to the server
     pub server_address: String,
-    
+
     /// The port the client is connecting to the server with
     pub server_port: u16,
-    
+
     /// The next state requested by the client
     pub next_state: u32
 
@@ -30,38 +30,40 @@ impl HandshakePacket {
 
     /// Decodes this HandshakePacket
     pub fn decode(header: PacketHeader, connection: &mut GameConnection, buffer: &mut DequeBuffer) -> HandshakePacket {
-                
+
         let protocol_result = buffer.read_unsigned_varint_32();
-        
+
         if protocol_result.is_err() {
             error!("Error reading protocol version");
             connection.disconnect();
         }
-        
+
         let hostname: String = buffer.read_utf8_string();
-        
+
         let port: u16 = buffer.read_unsigned_short();
-        
+
         let next_state_result = buffer.read_unsigned_varint_32();
-        
+
         if next_state_result.is_err() {
             error!("Invalid next state: {:?}", next_state_result);
             connection.disconnect();
         }
-        
+
         HandshakePacket { header: header, protocol_version: protocol_result.unwrap(), server_address: hostname, server_port: port, next_state: next_state_result.unwrap() }
-        
+
     }
-    
+
     /// Handles this HandshakePacket
     pub fn handle(&self, connection: &mut GameConnection) {
-    
+
+        debug!("Incoming connection using protocol {}", self.protocol_version);
+
         if self.server_address.ends_with("\0FML\0") {
             connection.forge_enabled = true;
         }
-    
+
         match self.next_state {
-        
+
             1 => {
                 connection.state = ConnectionState::STATUS;
             },
@@ -72,7 +74,7 @@ impl HandshakePacket {
                 error!("Invalid handshake next state of {}, disconnecting", self.next_state);
                 connection.disconnect();
             }
-        
+
         }
     }
 
