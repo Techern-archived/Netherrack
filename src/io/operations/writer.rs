@@ -32,3 +32,4 @@ pub trait Writer : Write {
 }
 
 impl Writer for ::std::io::Cursor<Vec<u8>> { }
+impl Writer for ::std::net::TcpStream { }
