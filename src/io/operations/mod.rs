@@ -104,4 +104,64 @@ mod test {
 
     }
 
+    #[test]
+    fn test_read_write_be_u32() {
+
+        let mut vector = Cursor::new(vec![0u8; 0]);
+
+        assert!(vector.write_unsigned_be_int(4000000000).is_ok());
+        assert!(vector.write_unsigned_be_int(26436735).is_ok());
+
+        vector.set_position(0);
+
+        assert_eq!(4000000000, vector.read_unsigned_be_int().unwrap());
+        assert_eq!(26436735, vector.read_unsigned_be_int().unwrap());
+
+    }
+
+    #[test]
+    fn test_read_write_le_u32() {
+
+        let mut vector = Cursor::new(vec![0u8; 0]);
+
+        assert!(vector.write_unsigned_le_int(4000000000).is_ok());
+        assert!(vector.write_unsigned_le_int(26436735).is_ok());
+
+        vector.set_position(0);
+
+        assert_eq!(4000000000, vector.read_unsigned_le_int().unwrap());
+        assert_eq!(26436735, vector.read_unsigned_le_int().unwrap());
+
+    }
+
+    #[test]
+    fn test_read_write_be_i32() {
+
+        let mut vector = Cursor::new(vec![0u8; 0]);
+
+        assert!(vector.write_signed_be_int(-2100000000).is_ok());
+        assert!(vector.write_signed_be_int(26436735).is_ok());
+
+        vector.set_position(0);
+
+        assert_eq!(-2100000000, vector.read_signed_be_int().unwrap());
+        assert_eq!(26436735, vector.read_signed_be_int().unwrap());
+
+    }
+
+    #[test]
+    fn test_read_write_le_i32() {
+
+        let mut vector = Cursor::new(vec![0u8; 0]);
+
+        assert!(vector.write_signed_le_int(-2100000000).is_ok());
+        assert!(vector.write_signed_le_int(26436735).is_ok());
+
+        vector.set_position(0);
+
+        assert_eq!(-2100000000, vector.read_signed_le_int().unwrap());
+        assert_eq!(26436735, vector.read_signed_le_int().unwrap());
+
+    }
+
 }
