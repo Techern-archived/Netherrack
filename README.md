@@ -2,7 +2,7 @@
 ## A Minecraft server implementation programmed in Rust
 
 [![Build Status](https://travis-ci.org/Techern/Netherrack.svg?branch=master)](https://travis-ci.org/Techern/Netherrack)  [![Crates.io](https://img.shields.io/crates/v/netherrack.svg)](https://crates.io/crates/netherrack)
-[![Coverage Status](https://coveralls.io/repos/Techern/Netherrack/badge.svg?branch=master&service=github)](https://coveralls.io/github/Techern/Netherrack?branch=master)
+[![Coverage Status](https://coveralls.io/repos/Techern/Netherrack/badge.svg?branch=master&service=github)](https://coveralls.io/github/Techern/Netherrack?branch=master) [![Minecraft target](https://img.shields.io/badge/MC%20Target-1.8-green.svg)]()
 
 ## About Netherrack
 
