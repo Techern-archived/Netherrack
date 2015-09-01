@@ -164,4 +164,64 @@ mod test {
 
     }
 
+    #[test]
+    fn test_read_write_be_u64() {
+
+        let mut vector = Cursor::new(vec![0u8; 0]);
+
+        assert!(vector.write_unsigned_be_long(35754238465284).is_ok());
+        assert!(vector.write_unsigned_be_long(423).is_ok());
+
+        vector.set_position(0);
+
+        assert_eq!(35754238465284, vector.read_unsigned_be_long().unwrap());
+        assert_eq!(423, vector.read_unsigned_be_long().unwrap());
+
+    }
+
+    #[test]
+    fn test_read_write_le_u64() {
+
+        let mut vector = Cursor::new(vec![0u8; 0]);
+
+        assert!(vector.write_unsigned_le_long(35754238465284).is_ok());
+        assert!(vector.write_unsigned_le_long(423).is_ok());
+
+        vector.set_position(0);
+
+        assert_eq!(35754238465284, vector.read_unsigned_le_long().unwrap());
+        assert_eq!(423, vector.read_unsigned_le_long().unwrap());
+
+    }
+
+    #[test]
+    fn test_read_write_be_i64() {
+
+        let mut vector = Cursor::new(vec![0u8; 0]);
+
+        assert!(vector.write_signed_be_long(-5754238465284).is_ok());
+        assert!(vector.write_signed_be_long(423).is_ok());
+
+        vector.set_position(0);
+
+        assert_eq!(-5754238465284, vector.read_signed_be_long().unwrap());
+        assert_eq!(423, vector.read_signed_be_long().unwrap());
+
+    }
+
+    #[test]
+    fn test_read_write_le_i64() {
+
+        let mut vector = Cursor::new(vec![0u8; 0]);
+
+        assert!(vector.write_signed_le_long(-5754238465284).is_ok());
+        assert!(vector.write_signed_le_long(423).is_ok());
+
+        vector.set_position(0);
+
+        assert_eq!(-5754238465284, vector.read_signed_le_long().unwrap());
+        assert_eq!(423, vector.read_signed_le_long().unwrap());
+
+    }
+
 }
