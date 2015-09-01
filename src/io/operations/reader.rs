@@ -50,3 +50,5 @@ pub trait Reader : Read {
 
     }
 }
+
+impl Reader for ::std::io::Cursor<Vec<u8>> { }

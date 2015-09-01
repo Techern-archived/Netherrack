@@ -30,3 +30,5 @@ pub trait Writer : Write {
     }
 
 }
+
+impl Writer for ::std::io::Cursor<Vec<u8>> { }

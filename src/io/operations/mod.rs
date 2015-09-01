@@ -14,14 +14,6 @@ mod test {
 
     use std::io::Cursor;
 
-    impl Writer for Cursor<Vec<u8>> {
-
-    }
-
-    impl Reader for Cursor<Vec<u8>> {
-
-    }
-
     #[test]
     fn test_read_write_u8() {
 
