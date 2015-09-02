@@ -20,20 +20,21 @@ pub trait NetherrackReader : Reader {
 
         loop {
 
-            let byte_value = self.read_unsigned_byte();
+            match self.read_unsigned_byte() {
+                Err(error) => {
+                    error!("Got an error while reading a byte for an unsigned varint32: {}", error);
+                    return Err("Could not read an unsigned byte for an unsigned varint32");
+                }
 
-            if byte_value.is_err() {
-                return Err("Byte in read_unsigned_varint_32 returned an error");
-            } else {
-                let byte_value: u8 = byte_value.unwrap();
+                Ok(byte_value) => {
+                    decoded_value |= ((byte_value & 0b01111111) as u32) << shift_amount;
 
-                decoded_value |= ((byte_value & 0b01111111) as u32) << shift_amount;
-
-                // See if we're supposed to keep reading
-                if byte_value.has_most_signifigant_bit() {
-                    shift_amount += 7;
-                } else {
-                    return Ok(decoded_value);
+                    // See if we're supposed to keep reading
+                    if byte_value.has_most_signifigant_bit() {
+                        shift_amount += 7;
+                    } else {
+                        return Ok(decoded_value);
+                    }
                 }
             }
 
