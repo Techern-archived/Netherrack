@@ -9,6 +9,20 @@ use self::bit_utils::BitInformation;
 
 pub trait NetherrackReader : Reader {
 
+    /// Reads a signed 32-bit Varint from this NetherrackReader
+    #[allow(unused_variables)] //For the error handling as we need to change the string
+    fn read_signed_varint_32(&mut self) -> Result<i32, &'static str> {
+        match self.read_unsigned_varint_32() {
+            Ok(value) => {
+                return Ok(self::varint::zigzag_unsigned_int(value));
+            }
+
+            Err(error) => {
+                return Err("Could not read a signed varint32");
+            }
+        }
+    }
+
     /// Reads an unsigned 32-bit Varint from this NetherrackReader
     fn read_unsigned_varint_32(&mut self) -> Result<u32, &'static str> {
 
