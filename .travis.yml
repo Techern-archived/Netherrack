@@ -14,11 +14,14 @@ before_script:
   pip install 'travis-cargo<0.2' --user &&
   export PATH=$HOME/.local/bin:$PATH
 script:
-- |
-  travis-cargo build &&
-  travis-cargo test &&
-  travis-cargo --only nightly bench &&
-  travis-cargo --only stable doc
+#- |
+#  travis-cargo build &&
+#  travis-cargo test &&
+#  travis-cargo --only nightly bench &&
+#  travis-cargo --only stable doc
+# TODO Change this back, temp fix for nightly breakage in travis-cargo
+- travis-cargo --only stable build && travis-cargo --only stable test && travis-cargo --only stable doc
+- travis-cargo --only beta build && travis-cargo --only beta test
 after_success:
 - travis-cargo --only stable doc-upload
   # measure code coverage and upload to coveralls.io
