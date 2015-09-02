@@ -32,4 +32,28 @@ mod test {
 
     }
 
+    #[test]
+    fn test_read_write_lots_of_unsigned_varint_32() {
+
+        let mut vector = Cursor::new(vec![0u8; 0]);
+
+        let mut index = 0;
+
+        while index < 123456 {
+            index += 1;
+
+            assert!(vector.write_unsigned_varint_32(index).is_ok());
+        }
+
+        vector.set_position(0);
+        index = 0;
+
+        while index < 123456 {
+            index += 1;
+
+            assert_eq!(index, vector.read_unsigned_varint_32().unwrap());
+        }
+
+    }
+
 }
