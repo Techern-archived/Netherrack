@@ -15,6 +15,8 @@ pub use semver::Version;
 // Allow use of the core module
 pub mod core;
 
+// Import I/O operations before Netherrack-specific ones
+extern crate io_operations;
 // Allow access to I/O operations
 pub mod io;
 
@@ -36,20 +38,20 @@ pub fn get_version() -> Version {
 
 /// Starts a new Netherrack server instance
 pub fn start_server() {
-    
+
     info!("Netherrack startup called");
-    
+
     trace!("Starting network in a new thread");
-    
+
     std::thread::spawn(move || {
         io::network::start_network();
     });
-    
+
     debug!("Networking should be set up");
-    
+
     loop {
         //TODO: In the future, execute a tick. Use Duration's span function to get time taken, sleep the remainder, and go again
         std::thread::sleep_ms(20);
     }
-    
+
 }
