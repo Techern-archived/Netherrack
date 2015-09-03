@@ -8,6 +8,21 @@ extern crate varint;
 
 pub trait NetherrackWriter : Writer {
 
+    /// Writes a UTF-8 string to this NetherrackWriter
+    fn write_utf8_string(&mut self, value: String) -> Result<()> {
+
+        let bytes = value.as_bytes();
+
+        let _ = self.write_unsigned_varint_32(bytes.len() as u32); //FIXME: CHECK FOR FAILURE BEFORE 0.1.0
+
+        for &byte in bytes {
+            let _ = self.write_unsigned_byte(byte);
+        }
+
+        Ok(())
+
+    }
+
     /// Writes a signed varint 32 to this NetherrackWriter
     fn write_signed_varint_32(&mut self, value: i32) -> Result<()> {
         self.write_unsigned_varint_32(self::varint::zigzag_signed_int(value))

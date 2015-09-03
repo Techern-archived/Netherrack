@@ -9,6 +9,51 @@ use self::bit_utils::BitInformation;
 
 pub trait NetherrackReader : Reader {
 
+    /// Reads a UTF-8 string from the buffer
+    #[allow(unused_variables)] //Only for error stuff
+    fn read_utf8_string(&mut self) -> Result<String, &'static str> {
+
+        match self.read_unsigned_varint_32() {
+
+            Err(error) => {
+                return Err("Bad size for utf-8 string");
+            }
+
+            Ok(mut size) => {
+
+                let mut bytes: Vec<u8> = Vec::<u8>::with_capacity(size as usize);
+
+                while size > 0 {
+                    match self.read_unsigned_byte() {
+                        Err(error) => {
+                            return Err("Bad things while reading a UTF-8 string");
+                        }
+
+                        Ok(value) => {
+                            bytes.push(value);
+                            size -= 1;
+                        }
+                    }
+                }
+
+                match String::from_utf8(bytes) {
+
+                    Err(errval) => {
+                        return Err("Error parsing UTF-8 String");
+                    }
+
+                    Ok(string) => {
+                        return Ok(string);
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
     /// Reads a signed 32-bit Varint from this NetherrackReader
     #[allow(unused_variables)] //For the error handling as we need to change the string
     fn read_signed_varint_32(&mut self) -> Result<i32, &'static str> {

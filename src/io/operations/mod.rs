@@ -13,6 +13,27 @@ mod test {
     use std::io::Cursor;
 
     #[test]
+    fn test_read_write_utf8_string() {
+
+        let mut vector = Cursor::new(vec![0u8; 0]);
+
+        assert!(vector.write_utf8_string("Hello, world!".to_string()).is_ok());
+        assert!(vector.write_utf8_string("".to_string()).is_ok());
+        assert!(vector.write_utf8_string("null".to_string()).is_ok());
+        assert!(vector.write_utf8_string("0".to_string()).is_ok());
+        assert!(vector.write_utf8_string("And that is why this really, really, really, really, really, really, really, really, really, really, really, really, really, really, really, really, really, really, really, really, really, really, really, really, really, long string is the Prince of Bel-Air".to_string()).is_ok());
+
+        vector.set_position(0);
+
+        assert_eq!("Hello, world!", vector.read_utf8_string().unwrap());
+        assert_eq!("", vector.read_utf8_string().unwrap());
+        assert_eq!("null", vector.read_utf8_string().unwrap());
+        assert_eq!("0", vector.read_utf8_string().unwrap());
+        assert_eq!("And that is why this really, really, really, really, really, really, really, really, really, really, really, really, really, really, really, really, really, really, really, really, really, really, really, really, really, long string is the Prince of Bel-Air", vector.read_utf8_string().unwrap());
+
+    }
+
+    #[test]
     fn test_read_write_unsigned_varint_32() {
 
         let mut vector = Cursor::new(vec![0u8; 0]);
