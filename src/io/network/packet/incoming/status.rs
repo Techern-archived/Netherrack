@@ -1,5 +1,5 @@
 //! Handles all status packets
-
+/*
 use super::super::super::deque_buffer::DequeBuffer;
 use super::super::super::game_connection::GameConnection; //It's super super super effective!
 
@@ -71,4 +71,4 @@ impl ListPingPacket {
         ListPongPacket::new(self.payload).send(connection);
     }
 
-}
+}*/

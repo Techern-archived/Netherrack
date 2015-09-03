@@ -1,5 +1,5 @@
 //! Implements all outgoing status packets
-
+/*
 use super::super::super::deque_buffer::DequeBuffer;
 use super::super::super::game_connection::GameConnection; //It's super super super effective!
 use super::super::{ ID_STATUS_STC_RESPONSE, ID_STATUS_STC_PONG };
@@ -233,4 +233,4 @@ impl OutgoingPacket for ListPongPacket {
         connection.disconnect();
     }
 
-}
+}*/

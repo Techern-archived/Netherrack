@@ -2,7 +2,7 @@
 //!
 //! Thankfully, there's only one packet so far :)
 
-use super::super::super::deque_buffer::DequeBuffer;
+/*use super::super::super::deque_buffer::DequeBuffer;
 use super::super::super::game_connection::{ConnectionState, GameConnection}; //It's super super super effective!
 use super::super::PacketHeader;
 
@@ -78,4 +78,4 @@ impl HandshakePacket {
         }
     }
 
-}
+}*/
