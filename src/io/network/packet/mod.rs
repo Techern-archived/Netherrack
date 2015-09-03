@@ -4,18 +4,17 @@ pub mod incoming;
 pub mod outgoing;
 
 pub use super::game_connection::GameConnection;
-pub use super::deque_buffer::DequeBuffer;
 
 /// A struct defining the header of a Packet
 #[derive(Clone, Debug)]
 pub struct PacketHeader {
-    
+
     /// The number of bytes contained in the ID and the packet data
     pub length: u32,
-    
+
     /// The ID of this packet
     pub id: u32
-    
+
 }
 
 impl PacketHeader {

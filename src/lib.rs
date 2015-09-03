@@ -23,6 +23,9 @@ pub mod io;
 // Allow access to the universe
 pub mod universe;
 
+
+pub use std::sync::mpsc::{ Sender, Receiver, channel };
+
 // Okay, this is the start of Netherrack's functions
 
 /// The version of the Minecraft protocol accepted by Netherrack

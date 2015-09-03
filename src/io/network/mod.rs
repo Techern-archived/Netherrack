@@ -5,8 +5,6 @@
 pub mod game_connection;
 use self::game_connection::GameConnection;
 
-pub mod deque_buffer;
-
 pub mod packet;
 
 use std::net::TcpListener;
@@ -17,7 +15,7 @@ use std::thread;
 fn start_listening(port: u16) -> Result<TcpListener, &'static str> {
 
     let listener = TcpListener::bind(("127.0.0.1", port));
-    
+
     if listener.is_ok() {
         return Ok(listener.unwrap());
     } else {
@@ -29,15 +27,15 @@ fn start_listening(port: u16) -> Result<TcpListener, &'static str> {
 pub fn start_network() {
 
     let listener = start_listening(25565);
-    
+
     if listener.is_err() {
         error!("Could not start listening on port {}", 25565);
     }
-    
+
     let listener = listener.unwrap();
-    
+
     for stream in listener.incoming() {
-    
+
         match stream {
             Ok(stream) => {
                 thread::spawn(move || {
@@ -46,13 +44,13 @@ pub fn start_network() {
                     GameConnection::new(stream).start_listening()
                 });
             }
-            Err(e) => { 
+            Err(e) => {
                 error!("Could not accept a new stream: {}", e);
             }
         }
-    
+
     }
-    
+
     drop(listener);
 
 }
