@@ -7,6 +7,10 @@ extern crate rustc_serialize;
 #[macro_use]
 extern crate log;
 
+// Enable global use of lazy_static
+#[macro_use]
+extern crate lazy_static;
+
 // Allow use of Semantic Versioning througout Netherrack
 extern crate semver;
 // Also allow usage of Version through Netherrack
