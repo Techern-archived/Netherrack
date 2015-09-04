@@ -14,7 +14,7 @@ use std::thread;
 
 fn start_listening(port: u16) -> Result<TcpListener, &'static str> {
 
-    let listener = TcpListener::bind(("127.0.0.1", port));
+    let listener = TcpListener::bind(("0.0.0.0", port));
 
     if listener.is_ok() {
         return Ok(listener.unwrap());
