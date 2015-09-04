@@ -10,7 +10,40 @@ mod test {
     use super::reader::NetherrackReader;
     use super::writer::NetherrackWriter;
 
-    use std::io::Cursor;
+    use io_operations::writer::Writer;
+    use io_operations::reader::Reader;
+
+
+    use std::io::{ Read, Cursor };
+
+    #[test]
+    fn test_read_write_cursor_changes() {
+
+        let mut vector = Cursor::new(vec![0u8; 0]);
+
+        assert!(vector.write_utf8_string("Hello, cruel world!".to_string()).is_ok());
+
+        assert!(vector.write_unsigned_byte(13).is_ok());
+
+        let bytes_written = vector.position() as u32;
+
+        let mut new_vector = Cursor::new(vec![0u8; 0]);
+
+        assert!(new_vector.write_unsigned_varint_32(bytes_written).is_ok());
+
+        vector.set_position(0);
+
+        vector.read_to_end(new_vector.get_mut());
+
+        new_vector.set_position(0);
+
+        assert_eq!(bytes_written, new_vector.read_unsigned_varint_32().unwrap());
+
+        assert_eq!("Hello, cruel world!", new_vector.read_utf8_string().unwrap());
+
+        assert_eq!(13, new_vector.read_unsigned_byte().unwrap());
+
+    }
 
     #[test]
     fn test_read_write_utf8_string() {
