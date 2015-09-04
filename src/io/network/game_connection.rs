@@ -8,8 +8,6 @@ use self::chrono::duration::Duration;
                      ID_STATUS_CTS_REQUEST, ID_STATUS_CTS_PING
                    };*/
 
-use std::collections::VecDeque;
-
 use std::net::{Shutdown, TcpStream};
 
 use std::io::Read;
@@ -76,6 +74,8 @@ impl GameConnection {
 
         self.connected = false;
 
+        ::std::thread::yield_now();
+
     }
 
     /// Starts listening on the connection
@@ -87,7 +87,7 @@ impl GameConnection {
 
         loop {
 
-            if timeout_duration.num_seconds() >= 10 {
+            if timeout_duration.num_seconds() >= 1 {
                 info!("Client at {} timed out, dropping connection", self.stream.peer_addr().unwrap());
                 self.disconnect();
                 break;
