@@ -10,9 +10,7 @@ use self::chrono::duration::Duration;
 
 use std::net::{Shutdown, TcpStream};
 
-use std::io::Read;
-
-//use super::deque_buffer::DequeBuffer;
+use ::io_operations::reader::Reader;
 
 /// An enum describing the current connection's state
 #[derive(PartialEq, Clone, Copy, Debug)]
@@ -87,6 +85,10 @@ impl GameConnection {
 
         loop {
 
+            //First, let's start off the timeout timer.
+            timeout_duration = timeout_duration + Duration::milliseconds(2);
+            ::std::thread::sleep_ms(2);
+
             if timeout_duration.num_seconds() >= 1 {
                 info!("Client at {} timed out, dropping connection", self.stream.peer_addr().unwrap());
                 self.disconnect();
@@ -98,8 +100,21 @@ impl GameConnection {
                 break;
             }
 
-            timeout_duration = timeout_duration + Duration::milliseconds(2);
-            ::std::thread::sleep_ms(2);
+            match self.stream.read_unsigned_byte() {
+                Err(error) => {
+
+                    if error != "Could not read one byte" {
+                        error!("Error: {}", error);
+                        self.disconnect();
+                    }
+                }
+
+                Ok(value) => {
+                    timeout_duration = Duration::zero();
+                    info!("Value is {}", value);
+                }
+            }
+
         /*
             let mut raw_buffer = vec![0u8; 512];
 
