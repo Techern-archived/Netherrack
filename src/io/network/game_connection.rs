@@ -87,7 +87,7 @@ impl GameConnection {
 
             //First, let's start off the timeout timer.
             timeout_duration = timeout_duration + Duration::milliseconds(2);
-            ::std::thread::sleep_ms(2);
+            ::std::thread::sleep(::std::time::Duration::from_millis(2));
 
             if timeout_duration.num_seconds() >= 1 {
                 info!("Client at {} timed out, dropping connection", self.stream.peer_addr().unwrap());

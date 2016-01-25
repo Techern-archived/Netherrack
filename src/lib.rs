@@ -58,7 +58,7 @@ pub fn start_server() {
 
     loop {
         //TODO: In the future, execute a tick. Use Duration's span function to get time taken, sleep the remainder, and go again
-        std::thread::sleep_ms(20);
+        std::thread::sleep(std::time::Duration::from_millis(20));
     }
 
 }
