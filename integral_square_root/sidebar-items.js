@@ -1,0 +1,1 @@
+initSidebarItems({"trait":[["SquareRoot64","A trait that allows calculation of square root into a Float(64)"]]});

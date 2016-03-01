@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["World","A structure defining a world"]]});

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `netherrack` crate.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, netherrack">
+
+    <title>netherrack - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'></p><script>window.sidebarCurrent = {name: 'netherrack', ty: 'mod', relpath: '../'};</script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>netherrack</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-0' class='srclink' href='../src/netherrack/lib.rs.html#1-64' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><p>Entry module for the Netherrack project</p>
+</div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='core/index.html'
+                               title='netherrack::core'>core</a></td>
+                        <td class='docblock short'>
+                             <p>Core functionality for Netherrack</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='io/index.html'
+                               title='netherrack::io'>io</a></td>
+                        <td class='docblock short'>
+                             <p>Access to various I/O operations and features</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='universe/index.html'
+                               title='netherrack::universe'>universe</a></td>
+                        <td class='docblock short'>
+                             <p>The universe, where everything to do with server-wide functions resides</p>
+
+                        </td>
+                    </tr>
+                </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Receiver.html'
+                               title='netherrack::Receiver'>Receiver</a></td>
+                        <td class='docblock short'>
+                             <p>The receiving-half of Rust&#39;s channel type. This half can only be owned by
+one thread</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Sender.html'
+                               title='netherrack::Sender'>Sender</a></td>
+                        <td class='docblock short'>
+                             <p>The sending-half of Rust&#39;s asynchronous channel type. This half can only be
+owned by one thread, but it can be cloned to send to other threads.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Version.html'
+                               title='netherrack::Version'>Version</a></td>
+                        <td class='docblock short'>
+                             <p>Represents a version number conforming to the semantic versioning scheme.</p>
+
+                        </td>
+                    </tr>
+                </table><h2 id='constants' class='section-header'><a href="#constants">Constants</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.MINECRAFT_PROTOCOL_VERSION.html'
+                               title='netherrack::MINECRAFT_PROTOCOL_VERSION'>MINECRAFT_PROTOCOL_VERSION</a></td>
+                        <td class='docblock short'>
+                             <p>The version of the Minecraft protocol accepted by Netherrack</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.NETHERRACK_VERSION_STRING.html'
+                               title='netherrack::NETHERRACK_VERSION_STRING'>NETHERRACK_VERSION_STRING</a></td>
+                        <td class='docblock short'>
+                             <p>The version of Netherrack as determined at compile time</p>
+
+                        </td>
+                    </tr>
+                </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.channel.html'
+                               title='netherrack::channel'>channel</a></td>
+                        <td class='docblock short'>
+                             <p>Creates a new asynchronous channel, returning the sender/receiver halves.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.get_version.html'
+                               title='netherrack::get_version'>get_version</a></td>
+                        <td class='docblock short'>
+                             <p>Gets the current version of Netherrack</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.start_server.html'
+                               title='netherrack::start_server'>start_server</a></td>
+                        <td class='docblock short'>
+                             <p>Starts a new Netherrack server instance</p>
+
+                        </td>
+                    </tr>
+                </table><h2 id='impls' class='section-header'><a href="#impls">Implementations</a></h2>
+<table></table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "netherrack";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

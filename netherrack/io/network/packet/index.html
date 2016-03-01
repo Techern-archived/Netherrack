@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `packet` mod in crate `netherrack`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, packet">
+
+    <title>netherrack::io::network::packet - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../../../index.html'>netherrack</a>::<wbr><a href='../../index.html'>io</a>::<wbr><a href='../index.html'>network</a></p><script>window.sidebarCurrent = {name: 'packet', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Module <a href='../../../index.html'>netherrack</a>::<wbr><a href='../../index.html'>io</a>::<wbr><a href='../index.html'>network</a>::<wbr><a class='mod' href=''>packet</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-116' class='srclink' href='../../../../src/netherrack/io/network/packet/mod.rs.html#1-365' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><p>Functions relating to network packets</p>
+</div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
+<table><tr><td><code>pub use super::game_connection::<a class='struct' href='../../../../netherrack/io/network/game_connection/struct.GameConnection.html' title='netherrack::io::network::game_connection::GameConnection'>GameConnection</a>;</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='incoming/index.html'
+                               title='netherrack::io::network::packet::incoming'>incoming</a></td>
+                        <td class='docblock short'>
+                             <p>The module containing all incoming packet implementations</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='mod' href='outgoing/index.html'
+                               title='netherrack::io::network::packet::outgoing'>outgoing</a></td>
+                        <td class='docblock short'>
+                             <p>The module containing all outgoing packet implementations</p>
+
+                        </td>
+                    </tr>
+                </table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.PacketHeader.html'
+                               title='netherrack::io::network::packet::PacketHeader'>PacketHeader</a></td>
+                        <td class='docblock short'>
+                             <p>A struct defining the header of a Packet</p>
+
+                        </td>
+                    </tr>
+                </table><h2 id='constants' class='section-header'><a href="#constants">Constants</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_HANDSHAKE_CTS_HANDSHAKING.html'
+                               title='netherrack::io::network::packet::ID_HANDSHAKE_CTS_HANDSHAKING'>ID_HANDSHAKE_CTS_HANDSHAKING</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a handshake packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_HANDSHAKE_CTS_LEGACY_PING.html'
+                               title='netherrack::io::network::packet::ID_HANDSHAKE_CTS_LEGACY_PING'>ID_HANDSHAKE_CTS_LEGACY_PING</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a legacy server list ping packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_LOGIN_CTS_ENCRYPTION_RESPONSE.html'
+                               title='netherrack::io::network::packet::ID_LOGIN_CTS_ENCRYPTION_RESPONSE'>ID_LOGIN_CTS_ENCRYPTION_RESPONSE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an encryption response packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_LOGIN_CTS_START_LOGIN.html'
+                               title='netherrack::io::network::packet::ID_LOGIN_CTS_START_LOGIN'>ID_LOGIN_CTS_START_LOGIN</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a start login packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_LOGIN_STC_DISCONNECT.html'
+                               title='netherrack::io::network::packet::ID_LOGIN_STC_DISCONNECT'>ID_LOGIN_STC_DISCONNECT</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a disconnect packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_LOGIN_STC_ENCRYPTION_REQUEST.html'
+                               title='netherrack::io::network::packet::ID_LOGIN_STC_ENCRYPTION_REQUEST'>ID_LOGIN_STC_ENCRYPTION_REQUEST</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an encryption request packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_LOGIN_STC_LOGIN_SUCCESS.html'
+                               title='netherrack::io::network::packet::ID_LOGIN_STC_LOGIN_SUCCESS'>ID_LOGIN_STC_LOGIN_SUCCESS</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a login success packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_LOGIN_STC_SET_COMPRESSION.html'
+                               title='netherrack::io::network::packet::ID_LOGIN_STC_SET_COMPRESSION'>ID_LOGIN_STC_SET_COMPRESSION</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a set compression packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_ANIMATION.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_ANIMATION'>ID_PLAY_CTS_ANIMATION</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an animation packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_CHANGE_HELD_ITEM.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_CHANGE_HELD_ITEM'>ID_PLAY_CTS_CHANGE_HELD_ITEM</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a change held item packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_CHAT_MESSAGE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_CHAT_MESSAGE'>ID_PLAY_CTS_CHAT_MESSAGE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a chat message packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_CLICK_WINDOW.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_CLICK_WINDOW'>ID_PLAY_CTS_CLICK_WINDOW</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a click window packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_CLIENT_SETTINGS.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_CLIENT_SETTINGS'>ID_PLAY_CTS_CLIENT_SETTINGS</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a client settings packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_CLIENT_STATUS.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_CLIENT_STATUS'>ID_PLAY_CTS_CLIENT_STATUS</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a client status packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_CLOSE_WINDOW.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_CLOSE_WINDOW'>ID_PLAY_CTS_CLOSE_WINDOW</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a close window packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_CONFIRM_TRANSACTION.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_CONFIRM_TRANSACTION'>ID_PLAY_CTS_CONFIRM_TRANSACTION</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a confirm transaction packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_CREATIVE_INVENTORY_ACTION.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_CREATIVE_INVENTORY_ACTION'>ID_PLAY_CTS_CREATIVE_INVENTORY_ACTION</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a creative inventory action packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_ENCHANT_ITEM.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_ENCHANT_ITEM'>ID_PLAY_CTS_ENCHANT_ITEM</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an enchant item packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_ENTITY_ACTION.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_ENTITY_ACTION'>ID_PLAY_CTS_ENTITY_ACTION</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an entity action packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_KEEP_ALIVE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_KEEP_ALIVE'>ID_PLAY_CTS_KEEP_ALIVE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a keep alive packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_PLAYER.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_PLAYER'>ID_PLAY_CTS_PLAYER</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a player packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_PLAYER_ABILITIES.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_PLAYER_ABILITIES'>ID_PLAY_CTS_PLAYER_ABILITIES</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a player abilities packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_PLAYER_BLOCK_PLACEMENT.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_PLAYER_BLOCK_PLACEMENT'>ID_PLAY_CTS_PLAYER_BLOCK_PLACEMENT</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a player block placement packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_PLAYER_DIGGING.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_PLAYER_DIGGING'>ID_PLAY_CTS_PLAYER_DIGGING</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a player digging packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_PLAYER_LOOK.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_PLAYER_LOOK'>ID_PLAY_CTS_PLAYER_LOOK</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a player look packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_PLAYER_POSITION.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_PLAYER_POSITION'>ID_PLAY_CTS_PLAYER_POSITION</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a player position packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_PLAYER_POSITION_AND_LOOK.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_PLAYER_POSITION_AND_LOOK'>ID_PLAY_CTS_PLAYER_POSITION_AND_LOOK</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a player position and look packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_PLUGIN_MESSAGE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_PLUGIN_MESSAGE'>ID_PLAY_CTS_PLUGIN_MESSAGE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a plugin message packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_RESOURCE_PACK_STATUS.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_RESOURCE_PACK_STATUS'>ID_PLAY_CTS_RESOURCE_PACK_STATUS</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a resource pack status packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_SIGN_UPDATE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_SIGN_UPDATE'>ID_PLAY_CTS_SIGN_UPDATE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a sign update packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_SPECTATE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_SPECTATE'>ID_PLAY_CTS_SPECTATE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a spectate packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_STEER_VEHICLE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_STEER_VEHICLE'>ID_PLAY_CTS_STEER_VEHICLE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a steer vehicle packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_TAB_COMPLETE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_TAB_COMPLETE'>ID_PLAY_CTS_TAB_COMPLETE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a tab complete packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_CTS_USE_ENTITY.html'
+                               title='netherrack::io::network::packet::ID_PLAY_CTS_USE_ENTITY'>ID_PLAY_CTS_USE_ENTITY</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a use entity packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_ANIMATION.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_ANIMATION'>ID_PLAY_STC_ANIMATION</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an animation packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_ATTACH_ENTITY.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_ATTACH_ENTITY'>ID_PLAY_STC_ATTACH_ENTITY</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an attach entity packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_BLOCK_ACTION.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_BLOCK_ACTION'>ID_PLAY_STC_BLOCK_ACTION</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a block action packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_BLOCK_BREAK_ANIMATION.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_BLOCK_BREAK_ANIMATION'>ID_PLAY_STC_BLOCK_BREAK_ANIMATION</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a block break animation packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_BLOCK_CHANGE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_BLOCK_CHANGE'>ID_PLAY_STC_BLOCK_CHANGE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a block change packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_BLOCK_ENTITY_UPDATE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_BLOCK_ENTITY_UPDATE'>ID_PLAY_STC_BLOCK_ENTITY_UPDATE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a block entity update packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_CAMERA.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_CAMERA'>ID_PLAY_STC_CAMERA</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a camera packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_CHANGE_GAME_STATE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_CHANGE_GAME_STATE'>ID_PLAY_STC_CHANGE_GAME_STATE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a change game state packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_CHANGE_HELD_ITEM.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_CHANGE_HELD_ITEM'>ID_PLAY_STC_CHANGE_HELD_ITEM</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a change held item packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_CHAT_MESSAGE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_CHAT_MESSAGE'>ID_PLAY_STC_CHAT_MESSAGE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a chat message packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_CHUNK_DATA.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_CHUNK_DATA'>ID_PLAY_STC_CHUNK_DATA</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a chunk data packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_CLOSE_WINDOW.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_CLOSE_WINDOW'>ID_PLAY_STC_CLOSE_WINDOW</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a close window packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_COLLECT_ITEM.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_COLLECT_ITEM'>ID_PLAY_STC_COLLECT_ITEM</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a collect item packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_COMBAT_EVENT.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_COMBAT_EVENT'>ID_PLAY_STC_COMBAT_EVENT</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a combat event packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_CONFIRM_TRANSACTION.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_CONFIRM_TRANSACTION'>ID_PLAY_STC_CONFIRM_TRANSACTION</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a confirm transaction packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_DESTROY_ENTITIES.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_DESTROY_ENTITIES'>ID_PLAY_STC_DESTROY_ENTITIES</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a destroy entities packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_DISCONNECT.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_DISCONNECT'>ID_PLAY_STC_DISCONNECT</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a disconnect packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_DISPLAY_SCOREBOARD.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_DISPLAY_SCOREBOARD'>ID_PLAY_STC_DISPLAY_SCOREBOARD</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a display scoreboard packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_EFFECT.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_EFFECT'>ID_PLAY_STC_EFFECT</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an effect packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_ENTITY.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_ENTITY'>ID_PLAY_STC_ENTITY</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an entity packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_ENTITY_EFFECT.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_ENTITY_EFFECT'>ID_PLAY_STC_ENTITY_EFFECT</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an entity effect packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_ENTITY_EQUIPMENT.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_ENTITY_EQUIPMENT'>ID_PLAY_STC_ENTITY_EQUIPMENT</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a entity equipment packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_ENTITY_LOOK.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_ENTITY_LOOK'>ID_PLAY_STC_ENTITY_LOOK</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an entity look packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_ENTITY_LOOK_AND_RELATIVE_MOVE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_ENTITY_LOOK_AND_RELATIVE_MOVE'>ID_PLAY_STC_ENTITY_LOOK_AND_RELATIVE_MOVE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an entity look and relative move packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_ENTITY_METADATA.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_ENTITY_METADATA'>ID_PLAY_STC_ENTITY_METADATA</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an entity metadata packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_ENTITY_PROPERTIES.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_ENTITY_PROPERTIES'>ID_PLAY_STC_ENTITY_PROPERTIES</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an entity properties packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_ENTITY_RELATIVE_MOVE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_ENTITY_RELATIVE_MOVE'>ID_PLAY_STC_ENTITY_RELATIVE_MOVE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an entity relative move packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_ENTITY_STATUS.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_ENTITY_STATUS'>ID_PLAY_STC_ENTITY_STATUS</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an entity status packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_ENTITY_TELEPORT.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_ENTITY_TELEPORT'>ID_PLAY_STC_ENTITY_TELEPORT</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an entity teleport packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_ENTITY_VELOCITY.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_ENTITY_VELOCITY'>ID_PLAY_STC_ENTITY_VELOCITY</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an entity velocity packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_EXPLOSION.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_EXPLOSION'>ID_PLAY_STC_EXPLOSION</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an explosion packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_HEAD_LOOK.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_HEAD_LOOK'>ID_PLAY_STC_HEAD_LOOK</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an entity head look packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_JOIN_GAME.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_JOIN_GAME'>ID_PLAY_STC_JOIN_GAME</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a &quot;join game&quot; packet packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_KEEP_ALIVE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_KEEP_ALIVE'>ID_PLAY_STC_KEEP_ALIVE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a keep-alive packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_MAPS.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_MAPS'>ID_PLAY_STC_MAPS</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a maps packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_MAP_CHUNK_BULK.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_MAP_CHUNK_BULK'>ID_PLAY_STC_MAP_CHUNK_BULK</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a map chunk bulk packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_MULTI_BLOCK_CHANGE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_MULTI_BLOCK_CHANGE'>ID_PLAY_STC_MULTI_BLOCK_CHANGE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a multi block change packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_OPEN_SIGN_EDITOR.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_OPEN_SIGN_EDITOR'>ID_PLAY_STC_OPEN_SIGN_EDITOR</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an open sign editor packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_OPEN_WINDOW.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_OPEN_WINDOW'>ID_PLAY_STC_OPEN_WINDOW</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an open window packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_PARTICLE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_PARTICLE'>ID_PLAY_STC_PARTICLE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a particle packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_PLAYER_ABILITIES.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_PLAYER_ABILITIES'>ID_PLAY_STC_PLAYER_ABILITIES</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a player abilities packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_PLAYER_LIST_HEADER_FOOTER.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_PLAYER_LIST_HEADER_FOOTER'>ID_PLAY_STC_PLAYER_LIST_HEADER_FOOTER</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a player list header/footer packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_PLAYER_LIST_ITEM.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_PLAYER_LIST_ITEM'>ID_PLAY_STC_PLAYER_LIST_ITEM</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a player list item packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_PLAYER_POSITION_AND_LOOK.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_PLAYER_POSITION_AND_LOOK'>ID_PLAY_STC_PLAYER_POSITION_AND_LOOK</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a player position <strong>and</strong> look packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_PLUGIN_MESSAGE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_PLUGIN_MESSAGE'>ID_PLAY_STC_PLUGIN_MESSAGE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a plugin message packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_REMOVE_ENTITY_EFFECT.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_REMOVE_ENTITY_EFFECT'>ID_PLAY_STC_REMOVE_ENTITY_EFFECT</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a remove entity effect packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_RESPAWN.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_RESPAWN'>ID_PLAY_STC_RESPAWN</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a respawn packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_SCOREBOARD_OBJECTIVE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_SCOREBOARD_OBJECTIVE'>ID_PLAY_STC_SCOREBOARD_OBJECTIVE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a scoreboard objective packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_SEND_RESOURCE_PACK.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_SEND_RESOURCE_PACK'>ID_PLAY_STC_SEND_RESOURCE_PACK</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a send resource pack packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_SERVER_DIFFICULTY.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_SERVER_DIFFICULTY'>ID_PLAY_STC_SERVER_DIFFICULTY</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a server difficulty packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_SET_COMPRESSION.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_SET_COMPRESSION'>ID_PLAY_STC_SET_COMPRESSION</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a set compression packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_SET_EXPERIENCE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_SET_EXPERIENCE'>ID_PLAY_STC_SET_EXPERIENCE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a set experience packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_SET_SLOT.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_SET_SLOT'>ID_PLAY_STC_SET_SLOT</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a set slot packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_SIGN_UPDATE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_SIGN_UPDATE'>ID_PLAY_STC_SIGN_UPDATE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a sign update packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_SOUND_EFFECT.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_SOUND_EFFECT'>ID_PLAY_STC_SOUND_EFFECT</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a sound effect packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_SPAWN_EXPERIENCE_ORB.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_SPAWN_EXPERIENCE_ORB'>ID_PLAY_STC_SPAWN_EXPERIENCE_ORB</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a spawn experience orb packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_SPAWN_GLOBAL_ENTITY.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_SPAWN_GLOBAL_ENTITY'>ID_PLAY_STC_SPAWN_GLOBAL_ENTITY</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a spawn global entity packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_SPAWN_MOB.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_SPAWN_MOB'>ID_PLAY_STC_SPAWN_MOB</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a spawn mob packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_SPAWN_OBJECT.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_SPAWN_OBJECT'>ID_PLAY_STC_SPAWN_OBJECT</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a spawn object packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_SPAWN_PAINTING.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_SPAWN_PAINTING'>ID_PLAY_STC_SPAWN_PAINTING</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a spawn painting packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_SPAWN_PLAYER.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_SPAWN_PLAYER'>ID_PLAY_STC_SPAWN_PLAYER</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a spawn player packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_SPAWN_POSITION.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_SPAWN_POSITION'>ID_PLAY_STC_SPAWN_POSITION</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a spawn position packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_STATISTICS.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_STATISTICS'>ID_PLAY_STC_STATISTICS</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a statistics packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_TAB_COMPLETE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_TAB_COMPLETE'>ID_PLAY_STC_TAB_COMPLETE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a tab complete packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_TEAMS.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_TEAMS'>ID_PLAY_STC_TEAMS</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a teams packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_TIME_UPDATE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_TIME_UPDATE'>ID_PLAY_STC_TIME_UPDATE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a time update packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_TITLE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_TITLE'>ID_PLAY_STC_TITLE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a title packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_UPDATE_ENTITY_NBT.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_UPDATE_ENTITY_NBT'>ID_PLAY_STC_UPDATE_ENTITY_NBT</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an update entity NBT packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_UPDATE_HEALTH.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_UPDATE_HEALTH'>ID_PLAY_STC_UPDATE_HEALTH</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a health update packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_UPDATE_SCORE.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_UPDATE_SCORE'>ID_PLAY_STC_UPDATE_SCORE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of an update score packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_USE_BED.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_USE_BED'>ID_PLAY_STC_USE_BED</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a use bed packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_WINDOW_ITEMS.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_WINDOW_ITEMS'>ID_PLAY_STC_WINDOW_ITEMS</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a window items packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_WINDOW_PROPERTY.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_WINDOW_PROPERTY'>ID_PLAY_STC_WINDOW_PROPERTY</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a window property packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_PLAY_STC_WORLD_BORDER.html'
+                               title='netherrack::io::network::packet::ID_PLAY_STC_WORLD_BORDER'>ID_PLAY_STC_WORLD_BORDER</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a world border packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_STATUS_CTS_PING.html'
+                               title='netherrack::io::network::packet::ID_STATUS_CTS_PING'>ID_STATUS_CTS_PING</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a ping packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_STATUS_CTS_REQUEST.html'
+                               title='netherrack::io::network::packet::ID_STATUS_CTS_REQUEST'>ID_STATUS_CTS_REQUEST</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a request packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_STATUS_STC_PONG.html'
+                               title='netherrack::io::network::packet::ID_STATUS_STC_PONG'>ID_STATUS_STC_PONG</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a pong packet</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.ID_STATUS_STC_RESPONSE.html'
+                               title='netherrack::io::network::packet::ID_STATUS_STC_RESPONSE'>ID_STATUS_STC_RESPONSE</a></td>
+                        <td class='docblock short'>
+                             <p>The ID of a response packet</p>
+
+                        </td>
+                    </tr>
+                </table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../../../";
+        window.currentCrate = "netherrack";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../../../jquery.js"></script>
+    <script src="../../../../main.js"></script>
+    
+    <script defer src="../../../../search-index.js"></script>
+</body>
+</html>

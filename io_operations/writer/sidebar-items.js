@@ -1,0 +1,1 @@
+initSidebarItems({"trait":[["Writer","Extends the Write trait to provide common I/O writer operations"]]});

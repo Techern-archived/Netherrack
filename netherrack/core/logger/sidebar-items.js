@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["NetherrackLogger","The Logger used by Netherrack"]]});

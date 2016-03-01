@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `varint` crate.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, varint">
+
+    <title>varint - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'></p><script>window.sidebarCurrent = {name: 'varint', ty: 'mod', relpath: '../'};</script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content mod">
+<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>varint</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-0' class='srclink' href='../src/varint/lib.rs.html#1-433' title='goto source code'>[src]</a></span></h1>
+<div class='docblock'><p>An implementation of Google Protobuf&#39;s Variable-Length Integers</p>
+</div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='struct' href='struct.Varint.html'
+                               title='varint::Varint'>Varint</a></td>
+                        <td class='docblock short'>
+                             <p>A struct defining a variable-length integer</p>
+
+                        </td>
+                    </tr>
+                </table><h2 id='constants' class='section-header'><a href="#constants">Constants</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.VARINT_32_MAX_BYTES.html'
+                               title='varint::VARINT_32_MAX_BYTES'>VARINT_32_MAX_BYTES</a></td>
+                        <td class='docblock short'>
+                             <p>The maximum number of bytes used by a 32-bit Varint</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='constant' href='constant.VARINT_64_MAX_BYTES.html'
+                               title='varint::VARINT_64_MAX_BYTES'>VARINT_64_MAX_BYTES</a></td>
+                        <td class='docblock short'>
+                             <p>The maximum number of bytes used by a 32-bit Varint</p>
+
+                        </td>
+                    </tr>
+                </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
+<table>
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.decode_unsigned_varint32.html'
+                               title='varint::decode_unsigned_varint32'>decode_unsigned_varint32</a></td>
+                        <td class='docblock short'>
+                             <p>Decodes an unsigned varint32, returning a result of either a u32 or a string explaining the error</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.decode_unsigned_varint64.html'
+                               title='varint::decode_unsigned_varint64'>decode_unsigned_varint64</a></td>
+                        <td class='docblock short'>
+                             <p>Decodes an unsigned varint64, returning a result of either a u64 or a string explaining the error</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.encode_signed_varint32.html'
+                               title='varint::encode_signed_varint32'>encode_signed_varint32</a></td>
+                        <td class='docblock short'>
+                             <p>Encodes a signed i32 as a Varint</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.encode_signed_varint64.html'
+                               title='varint::encode_signed_varint64'>encode_signed_varint64</a></td>
+                        <td class='docblock short'>
+                             <p>Encodes a signed i64 as a Varint</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.encode_unsigned_varint32.html'
+                               title='varint::encode_unsigned_varint32'>encode_unsigned_varint32</a></td>
+                        <td class='docblock short'>
+                             <p>Encodes an unsigned u32 as a Varint, returning the Varint.</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.encode_unsigned_varint64.html'
+                               title='varint::encode_unsigned_varint64'>encode_unsigned_varint64</a></td>
+                        <td class='docblock short'>
+                             <p>Encodes an unsigned u64 as a Varint, returning the Varint</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.zigzag_signed_int.html'
+                               title='varint::zigzag_signed_int'>zigzag_signed_int</a></td>
+                        <td class='docblock short'>
+                             <p>Transforms a signed int to an unsigned int via zig-zag transformation</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.zigzag_signed_long.html'
+                               title='varint::zigzag_signed_long'>zigzag_signed_long</a></td>
+                        <td class='docblock short'>
+                             <p>Transforms a signed long to an unsigned long via zig-zag transformation</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.zigzag_unsigned_int.html'
+                               title='varint::zigzag_unsigned_int'>zigzag_unsigned_int</a></td>
+                        <td class='docblock short'>
+                             <p>Transforms an unsigned int to a signed int via zig-zag transformation</p>
+
+                        </td>
+                    </tr>
+                
+                    <tr class=' module-item'>
+                        <td><a class='fn' href='fn.zigzag_unsigned_long.html'
+                               title='varint::zigzag_unsigned_long'>zigzag_unsigned_long</a></td>
+                        <td class='docblock short'>
+                             <p>Transforms an unsignigned long to a signed long via zig-zag transformation</p>
+
+                        </td>
+                    </tr>
+                </table></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "varint";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script defer src="../search-index.js"></script>
+</body>
+</html>

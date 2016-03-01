@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["MAX_PLAYERS","The maximum number of players accepted by this universe"],["MAX_WORLDS","The maximum number of worlds to be hosted per universe"]],"mod":[["world","A world, where everything ingame happens."]]});
