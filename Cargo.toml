@@ -8,7 +8,7 @@ repository = "https://github.com/Techern/Netherrack"
 documentation = "http://techern.github.io/Netherrack"
 readme = "README.md"
 keywords = ["Minecraft", "Server"]
-license = "MIT"
+license = "MIT OR Apache-2.0"
 
 [dependencies]
 semver = "0.1.20"
