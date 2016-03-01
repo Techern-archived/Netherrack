@@ -33,7 +33,7 @@ mod test {
 
         vector.set_position(0);
 
-        vector.read_to_end(new_vector.get_mut());
+        let _end = vector.read_to_end(new_vector.get_mut());
 
         new_vector.set_position(0);
 
